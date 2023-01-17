@@ -1,0 +1,101 @@
+###############################################
+###  NOTES FOR POKÉMON ROCK PAPER SCISSORS  ###
+###############################################
+
+<> STRUCTURE
+    - OVERALL SCREEN
+        - MAIN SCREEN
+        - TEXT SCREEN
+
+===============================================
+
+* Homepage Scene
+-----------------
+    - OVERALL: 
+        - Red walking towards Blue
+        - Blue has exclamation point
+        - Battle transition; disassembling effect
+
+* Selection Scene
+------------------
+    - SCORE TAB: top of screen
+
+    - MAIN: Players sliding into position w/ VS effect
+    - TEXT: 
+        - "Blue challenges you to a roshambo-style Pokémon battle!"
+        - "First to 3 points will be the winner."
+
+    - MAIN: Pokémon Selection Screen
+        - 3 Pokéballs to choose from: Grass, Fire, Water
+        - Each Pokéball is selectable
+        - Highlighting effect w/ corresponding Pokémon displayed at the center top
+        - Background color changes according to Pokémon type (GREEN, RED, BLUE)
+    - TEXT: "Choose a Pokémon!"
+    - MISC: 5 seconds to choose; timer visible to user
+
+* Battle Scene
+---------------
+    - SCORE TAB: top of screen
+
+    - MAIN:
+        - Pokéball throwing animation
+        - Pokémon appear
+    - TEXT:
+        - "Let's go, [POKE NAME]!"
+        - Blue chose [POKE NAME]"
+
+    - MAIN:
+        - Stronger pokémon automatically attacks the weaker pokémon
+        - Simple attack animation
+    - TEXT:
+        - [POKEMON] used [GRASS/FIRE/WATER move]. It was super effective!"
+        - Point given to [RED/BLUE]! The score is now [x]-[x], [RED/BLUE] advantage.
+
+    - MISC: if tie, then...
+    - TEXT:
+        - Both Pokémon's attacks have cancelled each other's out! It's a tie!
+
+* Result Notification
+----------------------
+    - NOTIFICATION: shown centered on the screen
+        - "[RED/BLUE] is the champion!"
+    - UI:
+        - TRY AGAIN
+
+
+<> Outcomes
+- First to 3 points
+
+<> Etc:
+    - Music
+    - Sound Effects
+    - Sprites
+        - Pokémon
+            - Venasaur (front and back)
+            - Charizard (front and back)
+            - Blastoise (front and back)
+        - Trainers
+            - RED
+            - BLUE
+        - Pokéball
+        - Attacks
+            - Leaf Blade
+            - Fire Blast
+            - Hydro Pump
+    - Animation
+        - Fire Blast:
+            https://bulbapedia.bulbagarden.net/wiki/Fire_Blast_(move)
+        - Hydro Pump:
+            https://bulbapedia.bulbagarden.net/wiki/Hydro_Pump_(move)
+        - Leaf Blade:
+            https://bulbapedia.bulbagarden.net/wiki/Leaf_Blade_(move)
+        - Sprite Sheets
+            https://www.spriters-resource.com/game_boy_advance/pokemonfireredleafgreen/
+        - Photopea for image editing
+            https://www.photopea.com/
+        - PiskelApp for sprite editing
+            https://www.piskelapp.com
+        - Color picker
+            https://imagecolorpicker.com/en
+
+        

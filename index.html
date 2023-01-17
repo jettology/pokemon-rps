@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pokemon - Rock Paper Scissors</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Title + Subtitle -->
+    <div class="title" id="title">Pokémon</div>
+    <div class="title" id="subtitle">Rock - Paper - Scissors</div>
+
+    <!-- Start button -->
+    <div class="start-container">
+        <button id="startbutton">START</button>
+    </div>
+
+    <!-- Container to display the intro cutscene -->
+    <div class="intro-container">
+        <div class="intro-red-trainer">
+            <img class="red-running-spriteSheet pixelart" src="images/sheets/Trainer-Red-Running-Sheet.png"
+                alt="Red Running">
+        </div>
+    </div>
+
+    <!-- Container that holds the entire game -->
+    <div class="container">
+
+        <!-- Used only for displaying the score -->
+        <div class="score-container">
+            SCORE CONTAINER
+        </div>
+
+        <!-- Main visuals and UI -->
+        <div class="game-container">
+
+            <!-- Battle container -->
+            <div class="battle-container">
+                <img class="battle-image pixelart" src="images/sheets/Battle-BG-Sheet.png">
+
+                <div class="player-data">
+                    <img class="player-data-image pixelart" src="images/Player-Databox.png">
+                </div>
+
+                <div class="opponent-data">
+                    <img class="opponent-data-image pixelart" src="images/Opponent-Databox.png">
+                </div>
+            </div>
+
+            <!-- Outputs text throughout the game -->
+            <div class="text-container-border">
+                <div class="text-container">
+                    What will ZIGZAGOON do?
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Used to add credits and other misc info -->
+        <div class="footer">
+            FOOTER
+        </div>
+
+    </div>
+
+    <script src="index.js"></script>
+
+</body>
+
+</html>

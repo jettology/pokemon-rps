@@ -1,0 +1,217 @@
+@font-face {
+    font-family: Pokemon-Gen3;
+    /* TTF file for CSS3 browsers */
+    src: url("fonts/pkmndp.ttf")
+}
+
+@font-face {
+    font-family: Pokemon-Classic;
+    src: url("fonts/Pokemon\ Classic.ttf")
+}
+
+/* Global CSS variables */
+:root {
+    --intro-pixel-size: 3;
+    --game-width: 780px;
+    --game-height: 364px;
+    --data-box-size: 3;
+}
+
+body {
+    font-family: Pokemon-Gen3, Pokemon-Classic, Ubuntu, Roboto;
+
+    margin: auto;
+    background: #1F2937;
+    max-width: 1000px;
+    color: #F9FAF8;
+
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+}
+
+div {
+    text-align: center;
+
+    /* temp */
+    border-color: purple;
+    border-style: solid;
+    border-width: 1px;
+}
+
+button {
+    font-family: Pokemon-Classic, Ubuntu, Roboto;
+    font-size: xx-small;
+    color: red;
+    background-color: black;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+    font-weight: bolder;
+    height: 50px;
+    width: auto;
+}
+
+#subtitle {
+    font-size: medium;
+    color: red;
+}
+
+/* ====================================================
+   START + INTRO 
+   ==================================================== */
+
+.start-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 50px;
+    margin: auto;
+}
+
+.intro-container {
+    width: auto;
+    height: 200px;
+
+    display: flex;
+    justify-content: center;
+}
+
+/* ====================================================
+   MAIN CONTAINER 
+   ==================================================== */
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    padding: 10px;
+}
+
+.score-container {
+    height: 60;
+    width: 160px;
+}
+
+.game-container {
+    background-color: #2d2e35;
+    border-color:#000000;
+    border-width: 10px;
+    border-radius: 10px;
+}
+
+.battle-container {
+    width: var(--game-width);
+    height: var(--game-height);
+    position: relative;
+}
+
+.battle-image {
+    width: var(--game-width);
+    max-height: 100%;
+    padding: 0px;
+}
+
+.player-data, .opponent-data {
+    font-family: Pokemon-Gen3;
+    color: black;
+    /* text-shadow: 1px 1px black; */
+
+    z-index: 1;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+}
+
+.player-data {
+    right: 0px;
+    bottom: 0px;
+    width: calc(var(--data-box-size) * 104px);
+    height: calc(var(--data-box-size) * 36px);
+
+    margin-bottom: 6px;
+    margin-right: 30px;
+}
+
+.opponent-data {
+    left: 0px;
+    top: 0px;
+    width: calc(var(--data-box-size) * 100px);
+    height: calc(var(--data-box-size) * 29px);
+
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.player-data-image, .opponent-data-image {
+    width: 100%;
+}
+
+.text-container-border {
+    height: 200px;
+    background-color: #d04838;
+    margin: 6px;
+    padding: 6px 12px;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-container {
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    background-color: #589098;
+    color: #f4f5f6;
+    font-size: 32px;
+    border-radius: 10px;
+    padding: 20px 30px;
+    text-align: left;
+    text-shadow: 3px 3px black;
+}
+
+.footer {
+    height: 60;
+    width: calc(var(--game-width) + 20px);
+}
+
+
+/* ====================================================
+   RED TRAINER RUNNING ANIMATION 
+   ==================================================== */
+
+.intro-red-trainer {
+    width: calc(54px * var(--intro-pixel-size));
+    height: calc(53px * var(--intro-pixel-size));
+    overflow: hidden;
+}
+
+.red-running-spriteSheet {
+    animation: moveSpriteSheet 800ms steps(6) infinite;
+    width: calc(324px * var(--intro-pixel-size));
+}
+
+.pixelart {
+    image-rendering: pixelated;
+}
+
+@keyframes moveSpriteSheet {
+    from {
+        transform: translate3d(0px, 0, 0);
+    }
+
+    to {
+        transform: translate3d(-100%, 0, 0);
+    }
+}
+
+.container {
+    display: none;
+}
