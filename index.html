@@ -20,7 +20,7 @@
     <!-- Container to display the intro cutscene -->
     <div class="intro-container">
         <div class="intro-red-trainer">
-            <img class="red-running-spriteSheet pixelart" src="images/sheets/Trainer-Red-Running-Sheet.png"
+            <img class="red-running-spriteSheet pixelart" src="images/trainers/Trainer-Red-Running-Sheet.png"
                 alt="Red Running">
         </div>
     </div>
@@ -38,15 +38,37 @@
 
             <!-- Battle container -->
             <div class="battle-container">
-                <img class="battle-image pixelart" src="images/sheets/Battle-BG-Sheet.png">
+                <img class="battle-image pixelart" src="images/battle-ui/Battle-BG-Sheet.png">
 
-                <div class="player-data">
-                    <img class="player-data-image pixelart" src="images/Player-Databox.png">
+                <div class="attack-container">
+                    <img class="attack-image pixelart" src="images/moves/Player-Fire-Blast.png">
                 </div>
 
-                <div class="opponent-data">
-                    <img class="opponent-data-image pixelart" src="images/Opponent-Databox.png">
+                <div class="player-data-container">
+                    <img class="player-data-image pixelart" src="images/battle-ui/Player-Databox-Charizard.png">
+
+                    <div class="player-hp-container">
+                        <img class="player-hp-image pixelart" src="images/battle-ui/hp-full.png">
+                    </div>
                 </div>
+
+                <div class="opponent-data-container">
+                    <img class="opponent-data-image pixelart" src="images/battle-ui/Opponent-Databox-Venusaur.png">
+
+                    <div class="opponent-hp-container">
+                        <img class="opponent-hp-image pixelart" src="images/battle-ui/hp-full.png">
+                    </div>
+                </div>
+
+                <!-- Pokemon Sprites -->
+                <div class="player-pokemon-container">
+                    <img class="player-pokemon-image pixelart" src="images/pokemon/charizard_player.png">
+                </div>
+
+                <div class="opponent-pokemon-container">
+                    <img class="opponent-pokemon-image pixelart" src="images/pokemon/venusaur_opponent.png">
+                </div>
+
             </div>
 
             <!-- Outputs text throughout the game -->
@@ -63,6 +85,10 @@
         <div class="footer">
             FOOTER
         </div>
+
+        <!-- TEST BUTTON -->
+        <button id="TESTBUTTON">TEST BUTTON</button>
+
 
     </div>
 

@@ -15,6 +15,7 @@
     --game-width: 780px;
     --game-height: 364px;
     --data-box-size: 3;
+    --pokemon-size: 1.2;
 }
 
 body {
@@ -61,9 +62,9 @@ button {
     color: red;
 }
 
-/* ====================================================
-   START + INTRO 
-   ==================================================== */
+/* =======================================================
+   Start + Intro
+======================================================= */
 
 .start-container {
     display: flex;
@@ -82,9 +83,10 @@ button {
     justify-content: center;
 }
 
-/* ====================================================
-   MAIN CONTAINER 
-   ==================================================== */
+/* =======================================================
+   Main Container
+======================================================= */
+
 .container {
     display: flex;
     align-items: center;
@@ -114,21 +116,25 @@ button {
 .battle-image {
     width: var(--game-width);
     max-height: 100%;
-    padding: 0px;
 }
 
-.player-data, .opponent-data {
+/* =======================================================
+   Databoxes
+======================================================= */
+
+.player-data-container, .opponent-data-container {
+    z-index: 4;
+
     font-family: Pokemon-Gen3;
     color: black;
-    /* text-shadow: 1px 1px black; */
+    text-shadow: 1px 1px black;
 
-    z-index: 1;
     width: 100px;
     height: 100px;
     position: absolute;
 }
 
-.player-data {
+.player-data-container {
     right: 0px;
     bottom: 0px;
     width: calc(var(--data-box-size) * 104px);
@@ -138,7 +144,7 @@ button {
     margin-right: 30px;
 }
 
-.opponent-data {
+.opponent-data-container {
     left: 0px;
     top: 0px;
     width: calc(var(--data-box-size) * 100px);
@@ -151,6 +157,105 @@ button {
 .player-data-image, .opponent-data-image {
     width: 100%;
 }
+
+.player-hp-container, .opponent-hp-container {
+    position: absolute;
+    width: 142px;
+    height: 9px;
+}
+
+.player-hp-container {
+    top: 50px;
+    right: 24px;
+}
+
+.opponent-hp-container {
+    top: 50px;
+    right: 39px;
+}
+
+.player-hp-image, .opponent-hp-image {
+    width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    position: absolute;
+    left: 0px;
+}
+
+@keyframes deplete-hp {
+    from {width: 100%;}
+    to {width: 0%;}
+}
+
+/* =======================================================
+   Pokemon
+======================================================= */
+
+.player-pokemon-container, .opponent-pokemon-container {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+}
+
+.player-pokemon-container {
+    z-index: 3;
+
+    left: 0px;
+    bottom: 0px;
+    width: calc(var(--pokemon-size) * 160px);
+    height: calc(var(--pokemon-size) * 156px);
+    /* width: 192px;
+    height: 188px; */
+
+    margin-bottom: 0px;
+    margin-left: 110px;
+}
+
+.opponent-pokemon-container {
+    z-index: 1;
+
+    right: 0px;
+    top: 0px;
+    width: calc(var(--pokemon-size) * 152px);
+    height: calc(var(--pokemon-size) * 158px);
+    /* width: 183px;
+    height: 190px; */
+
+    margin-top: 40px;
+    margin-right: 115px;
+}
+
+.player-pokemon-image, .opponent-pokemon-image {
+    height: 100%;
+}
+
+/* =======================================================
+   Moves
+======================================================= */
+
+.attack-container {
+    z-index: 2;
+
+    width: var(--game-width);
+    height: var(--game-height);
+    position: absolute;
+
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+
+    overflow: hidden;
+}
+
+.attack-image {
+    width: 100%;
+    display: none;
+}
+
+/* =======================================================
+   Text Container
+======================================================= */
 
 .text-container-border {
     height: 200px;
@@ -177,15 +282,19 @@ button {
     text-shadow: 3px 3px black;
 }
 
+/* =======================================================
+   Footer
+======================================================= */
+
 .footer {
     height: 60;
     width: calc(var(--game-width) + 20px);
 }
 
 
-/* ====================================================
-   RED TRAINER RUNNING ANIMATION 
-   ==================================================== */
+/* =======================================================
+   Red Trainer Running Animation
+======================================================= */
 
 .intro-red-trainer {
     width: calc(54px * var(--intro-pixel-size));
@@ -194,15 +303,19 @@ button {
 }
 
 .red-running-spriteSheet {
-    animation: moveSpriteSheet 800ms steps(6) infinite;
+    animation: moveSpriteSheet_X 800ms steps(6) infinite;
     width: calc(324px * var(--intro-pixel-size));
 }
+
+/* =======================================================
+   Sprites + Animation
+======================================================= */
 
 .pixelart {
     image-rendering: pixelated;
 }
 
-@keyframes moveSpriteSheet {
+@keyframes moveSpriteSheet_X {
     from {
         transform: translate3d(0px, 0, 0);
     }
@@ -212,6 +325,12 @@ button {
     }
 }
 
-.container {
-    display: none;
+@keyframes moveSpriteSheet_Y {
+    from {
+        transform: translate3d(0px, 0, 0);
+    }
+
+    to {
+        transform: translate3d(0, -100%, 0);
+    }
 }

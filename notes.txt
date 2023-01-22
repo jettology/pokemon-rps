@@ -63,6 +63,9 @@
         - TRY AGAIN
 
 
+<> ADD-ON FEATURES
+    - Glitchy effect - START button
+
 <> Outcomes
 - First to 3 points
 
@@ -72,8 +75,17 @@
     - Sprites
         - Pokémon
             - Venasaur (front and back)
+                - front: 152 x 136 (width x height)
+                - back: 160 x 108
             - Charizard (front and back)
+                - front: 152 x 158
+                - back: 160 x 156
             - Blastoise (front and back)
+                - front: 138 x 132
+                - back: 156 x  112
+            - DESIRED CONTAINER (based on Charizard)
+                - OPPONENT (front): 152 x 158
+                - PLAYER (back): 160 x 156
         - Trainers
             - RED
             - BLUE
@@ -81,12 +93,12 @@
         - Attacks
             - Leaf Blade
             - Fire Blast
-            - Hydro Pump
+            - Hydro Cannon
     - Animation
         - Fire Blast:
             https://bulbapedia.bulbagarden.net/wiki/Fire_Blast_(move)
-        - Hydro Pump:
-            https://bulbapedia.bulbagarden.net/wiki/Hydro_Pump_(move)
+        - Hydro Cannon:
+            https://bulbapedia.bulbagarden.net/wiki/Hydro_Cannon_(move)
         - Leaf Blade:
             https://bulbapedia.bulbagarden.net/wiki/Leaf_Blade_(move)
         - Sprite Sheets
