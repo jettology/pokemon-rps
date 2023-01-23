@@ -2,6 +2,18 @@
 ###  NOTES FOR POKÉMON ROCK PAPER SCISSORS  ###
 ###############################################
 
+
+* NEXT TO DO:
+[ ] - choose your pokemon
+    [x] - three pokeball options
+    [ ] - create animation when mouse hovers
+    [ ] - implement logic for RPS
+    [ ] - texts corresponding to UI
+
+
+
+===============================================
+
 <> STRUCTURE
     - OVERALL SCREEN
         - MAIN SCREEN

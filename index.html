@@ -8,16 +8,22 @@
 </head>
 
 <body>
-    <!-- Title + Subtitle -->
+    <!-- ============================== -->
+    <!-- TITLE + SUBTITLE               -->
+    <!-- ============================== -->
     <div class="title" id="title">Pokémon</div>
     <div class="title" id="subtitle">Rock - Paper - Scissors</div>
 
-    <!-- Start button -->
+    <!-- ============================== -->
+    <!-- START BUTTON                   -->
+    <!-- ============================== -->
     <div class="start-container">
         <button id="startbutton">START</button>
     </div>
 
-    <!-- Container to display the intro cutscene -->
+    <!-- ============================== -->
+    <!-- RED RUNNING - CONTAINER        -->
+    <!-- ============================== -->
     <div class="intro-container">
         <div class="intro-red-trainer">
             <img class="red-running-spriteSheet pixelart" src="images/trainers/Trainer-Red-Running-Sheet.png"
@@ -25,25 +31,85 @@
         </div>
     </div>
 
-    <!-- Container that holds the entire game -->
+    <!-- ============================== -->
+    <!-- OVERALL CONTAINER              -->
+    <!-- ============================== -->
     <div class="container">
 
-        <!-- Used only for displaying the score -->
+        <!-- ============================== -->
+        <!-- SCORE CONTAINER                -->
+        <!-- ============================== -->
         <div class="score-container">
             SCORE CONTAINER
         </div>
 
-        <!-- Main visuals and UI -->
+        <!-- ============================== -->
+        <!-- GAME CONTAINER                 -->
+        <!-- ============================== -->
         <div class="game-container">
 
-            <!-- Battle container -->
-            <div class="battle-container">
-                <img class="battle-image pixelart" src="images/battle-ui/Battle-BG-Sheet.png">
+            <!-- ============================== -->
+            <!-- CHOOSE POKEMON CONTAINER       -->
+            <!-- ============================== -->
+            <div class="choose-container">
 
+                <div class="grass-column">
+
+                    <div class="grass-icon-container">
+                        <img class="grass-icon-image pixelart" src="images/choose-ui/pokemon-ui/venusaur-color.png">
+                    </div>
+    
+                    <div class="grass-pokeball-container">
+                        <img class="grass-pokeball-image pixelart" src="images/choose-ui/pokeball-2.png">
+                    </div>
+
+                </div>
+
+                <div class="fire-column">
+
+                    <div class="fire-icon-container">
+                        <img class="fire-icon-image pixelart" src="images/choose-ui/pokemon-ui/charizard-color.png">
+                    </div>
+    
+                    <div class="fire-pokeball-container">
+                        <img class="fire-pokeball-image pixelart" src="images/choose-ui/pokeball-2.png">
+                    </div>
+                    
+                </div>
+
+                <div class="water-column">
+
+                    <div class="water-icon-container">
+                        <img class="water-icon-image pixelart" src="images/choose-ui/pokemon-ui/blastoise-color.png">
+                    </div>
+    
+                    <div class="water-pokeball-container">
+                        <img class="water-pokeball-image pixelart" src="images/choose-ui/pokeball-2.png">
+                    </div>
+                    
+                </div>
+
+
+            </div>
+
+
+            <!-- ============================== -->
+            <!-- BATTLE CONTAINER               -->
+            <!-- ============================== -->
+            <div class="battle-container">
+                <img class="battle-image pixelart" src="images/battle-ui/battle-background.png">
+
+
+                <!-- ============================== -->
+                <!-- Attack                         -->
+                <!-- ============================== -->
                 <div class="attack-container">
                     <img class="attack-image pixelart" src="images/moves/Player-Fire-Blast-NEW.png">
                 </div>
 
+                <!-- ============================== -->
+                <!-- DATA CONTAINER                 -->
+                <!-- ============================== -->
                 <div class="player-data-container">
                     <img class="player-data-image pixelart" src="images/battle-ui/Player-Databox-Charizard.png">
 
@@ -60,7 +126,9 @@
                     </div>
                 </div>
 
-                <!-- Pokemon Sprites -->
+                <!-- ============================== -->
+                <!-- Pokemon Sprites                -->
+                <!-- ============================== -->
                 <div class="player-pokemon-container">
                     <img class="player-pokemon-image pixelart" src="images/pokemon/charizard_player.png">
                 </div>
@@ -71,7 +139,9 @@
 
             </div>
 
-            <!-- Outputs text throughout the game -->
+            <!-- ============================== -->
+            <!-- TEXT CONTAINER                 -->
+            <!-- ============================== -->
             <div class="text-container-border">
                 <div class="text-container">
                     What will ZIGZAGOON do?
@@ -80,15 +150,17 @@
 
         </div>
 
-
-        <!-- Used to add credits and other misc info -->
+        <!-- ============================== -->
+        <!-- FOOTER                         -->
+        <!-- ============================== -->
         <div class="footer">
             FOOTER
         </div>
 
+
+
         <!-- TEST BUTTON -->
         <button id="TESTBUTTON">TEST BUTTON</button>
-
 
     </div>
 

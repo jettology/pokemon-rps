@@ -107,10 +107,63 @@ button {
     border-radius: 10px;
 }
 
-.battle-container {
+.choose-container, .battle-container {
     width: var(--game-width);
     height: var(--game-height);
     position: relative;
+
+    border-color: aqua;
+}
+
+/* CHOOSE CONTAINER */
+.choose-container {
+    position: relative;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+
+    /* display: none; */
+}
+
+.grass-column, .fire-column, .water-column {
+    height: 100%;
+    width: calc(var(--game-width)/4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 30px;
+}
+
+.grass-icon-container, .fire-icon-container, .water-icon-container {
+    width: auto;
+    margin: 15px 15px ;
+
+    border-color: pink;
+}
+
+.grass-icon-image, .fire-icon-image, .water-icon-image {
+    height: 100%;
+    width: 100%;
+}
+
+.grass-pokeball-container, .fire-pokeball-container, .water-pokeball-container {
+    width: 40%;
+    height: auto;
+
+    border-color: red;
+}
+
+.grass-pokeball-image, .fire-pokeball-image, .water-pokeball-image {
+    height: 70px;
+    width: 70px;
+}
+
+
+
+/* BATTLE CONTAINER */
+.battle-container {
+    display: none;
 }
 
 .battle-image {
@@ -258,7 +311,7 @@ button {
 ======================================================= */
 
 .text-container-border {
-    height: 200px;
+    height: 156px;
     background-color: #d04838;
     margin: 6px;
     padding: 6px 12px;
@@ -279,7 +332,8 @@ button {
     border-radius: 10px;
     padding: 20px 30px;
     text-align: left;
-    text-shadow: 3px 3px black;
+    text-shadow: 3px 3px 2px black;
+    
 }
 
 /* =======================================================
