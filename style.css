@@ -148,18 +148,30 @@ button {
 }
 
 .grass-pokeball-container, .fire-pokeball-container, .water-pokeball-container {
-    width: 40%;
+    width: 60%;
     height: auto;
 
     border-color: red;
+    position: relative;
+
+    overflow: hidden;
 }
 
 .grass-pokeball-image, .fire-pokeball-image, .water-pokeball-image {
-    height: 70px;
-    width: 70px;
+    height: 100px;
+    width: 100px;
 }
 
-
+.grass-effect-image, .fire-effect-image, .water-effect-image {
+    width: 100px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 8px;
+    pointer-events: none;
+    animation: moveSpriteSheet_Y 1300ms steps(12) infinite;
+}
 
 /* BATTLE CONTAINER */
 .battle-container {

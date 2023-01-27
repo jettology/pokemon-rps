@@ -6,6 +6,13 @@
 * NEXT TO DO:
 [ ] - choose your pokemon
     [x] - three pokeball options
+
+    
+    [ ] - change pokemon icon img on mouse hover pokeball
+        - grass-icon-container / grass-icon-image
+        - grass-pokeball-container / grass-pokeball-image
+
+
     [ ] - create animation when mouse hovers
     [ ] - implement logic for RPS
     [ ] - texts corresponding to UI
