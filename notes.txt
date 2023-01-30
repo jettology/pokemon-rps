@@ -7,7 +7,7 @@
 [ ] - choose your pokemon
     [x] - three pokeball options
 
-    
+
     [ ] - change pokemon icon img on mouse hover pokeball
         - grass-icon-container / grass-icon-image
         - grass-pokeball-container / grass-pokeball-image
@@ -128,5 +128,9 @@
             https://www.piskelapp.com
         - Color picker
             https://imagecolorpicker.com/en
+    - Image Sources
+        - https://www.peakpx.com/en/hd-wallpaper-desktop-nkwoe
+        - https://www.spriters-resource.com/game_boy_advance/pokemonfireredleafgreen/
+        
 
         

@@ -8,6 +8,7 @@
 </head>
 
 <body>
+
     <!-- ============================== -->
     <!-- TITLE + SUBTITLE               -->
     <!-- ============================== -->
@@ -32,21 +33,26 @@
     </div>
 
     <!-- ============================== -->
-    <!-- OVERALL CONTAINER              -->
+    <!-- NINTENDO SWITCH CONTAINER      -->
     <!-- ============================== -->
-    <div class="container">
-
-        <!-- ============================== -->
-        <!-- SCORE CONTAINER                -->
-        <!-- ============================== -->
-        <div class="score-container">
-            SCORE CONTAINER
-        </div>
+    <div class="switch-container">
 
         <!-- ============================== -->
         <!-- GAME CONTAINER                 -->
         <!-- ============================== -->
         <div class="game-container">
+
+            <!-- ============================== -->
+            <!-- SCORE CONTAINER                -->
+            <!-- ============================== -->
+            <div class="score-container">
+                <div class="player-score-container">
+                    <span style="color: red">RED:</span>&nbsp0
+                </div>
+                <div class="opponent-score-container">
+                    <span style="color: rgb(0, 96, 255)">BLUE:</span>&nbsp0
+                </div>
+            </div>
 
             <!-- ============================== -->
             <!-- CHOOSE POKEMON CONTAINER       -->
@@ -58,7 +64,7 @@
                     <div class="grass-icon-container">
                         <img class="grass-icon-image pixelart" src="images/choose-ui/venusaur-sepia.png">
                     </div>
-    
+
                     <div class="grass-pokeball-container">
                         <img class="grass-pokeball-image pixelart" src="images/choose-ui/pokeball.png">
                         <img class="grass-effect-image" src="images/choose-ui/grass-effect.png" style="display:none">
@@ -71,12 +77,12 @@
                     <div class="fire-icon-container">
                         <img class="fire-icon-image pixelart" src="images/choose-ui/charizard-sepia.png">
                     </div>
-    
+
                     <div class="fire-pokeball-container">
                         <img class="fire-pokeball-image pixelart" src="images/choose-ui/pokeball.png">
                         <img class="fire-effect-image" src="images/choose-ui/fire-effect.png" style="display:none">
                     </div>
-                    
+
                 </div>
 
                 <div class="water-column">
@@ -84,12 +90,12 @@
                     <div class="water-icon-container">
                         <img class="water-icon-image pixelart" src="images/choose-ui/blastoise-sepia.png">
                     </div>
-    
+
                     <div class="water-pokeball-container">
                         <img class="water-pokeball-image pixelart" src="images/choose-ui/pokeball.png">
                         <img class="water-effect-image" src="images/choose-ui/water-effect.png" style="display:none">
                     </div>
-                    
+
                 </div>
 
 
@@ -107,14 +113,14 @@
                 <!-- Attack                         -->
                 <!-- ============================== -->
                 <div class="attack-container">
-                    <img class="attack-image pixelart" src="images/moves/Player-Fire-Blast-NEW.png">
+                    <img class="attack-image pixelart" src="">
                 </div>
 
                 <!-- ============================== -->
                 <!-- DATA CONTAINER                 -->
                 <!-- ============================== -->
                 <div class="player-data-container">
-                    <img class="player-data-image pixelart" src="images/battle-ui/Player-Databox-Charizard.png">
+                    <img class="player-data-image pixelart" src="">
 
                     <div class="player-hp-container">
                         <img class="player-hp-image pixelart" src="images/battle-ui/hp-full.png">
@@ -122,7 +128,7 @@
                 </div>
 
                 <div class="opponent-data-container">
-                    <img class="opponent-data-image pixelart" src="images/battle-ui/Opponent-Databox-Venusaur.png">
+                    <img class="opponent-data-image pixelart" src="">
 
                     <div class="opponent-hp-container">
                         <img class="opponent-hp-image pixelart" src="images/battle-ui/hp-full.png">
@@ -133,11 +139,11 @@
                 <!-- Pokemon Sprites                -->
                 <!-- ============================== -->
                 <div class="player-pokemon-container">
-                    <img class="player-pokemon-image pixelart" src="images/pokemon/charizard_player.png">
+                    <img class="player-pokemon-image pixelart" src="">
                 </div>
 
                 <div class="opponent-pokemon-container">
-                    <img class="opponent-pokemon-image pixelart" src="images/pokemon/venusaur_opponent.png">
+                    <img class="opponent-pokemon-image pixelart" src="">
                 </div>
 
             </div>
@@ -147,24 +153,19 @@
             <!-- ============================== -->
             <div class="text-container-border">
                 <div class="text-container">
-                    What will ZIGZAGOON do?
+                    Choose your Pokémon!
                 </div>
             </div>
 
         </div>
 
-        <!-- ============================== -->
-        <!-- FOOTER                         -->
-        <!-- ============================== -->
-        <div class="footer">
-            FOOTER
-        </div>
+    </div>
 
-
-
-        <!-- TEST BUTTON -->
-        <button id="TESTBUTTON">TEST BUTTON</button>
-
+    <!-- ============================== -->
+    <!-- FOOTER                         -->
+    <!-- ============================== -->
+    <div class="footer">
+        FOOTER
     </div>
 
     <script src="index.js"></script>

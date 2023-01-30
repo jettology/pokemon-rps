@@ -22,22 +22,24 @@ body {
     font-family: Pokemon-Gen3, Pokemon-Classic, Ubuntu, Roboto;
 
     margin: auto;
-    background: #1F2937;
-    max-width: 1000px;
+    /* background: #1F2937; */
+    background: rgb(134, 131, 149);
+    /* max-width: 1000px; */
     color: #F9FAF8;
+
+    margin: 10px;
 
     border-color: black;
     border-style: solid;
     border-width: 2px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 div {
     text-align: center;
-
-    /* temp */
-    border-color: purple;
-    border-style: solid;
-    border-width: 1px;
 }
 
 button {
@@ -46,6 +48,7 @@ button {
     color: red;
     background-color: black;
 }
+
 
 .title {
     display: flex;
@@ -87,32 +90,73 @@ button {
    Main Container
 ======================================================= */
 
-.container {
+.switch-container {
     display: flex;
     align-items: center;
     flex-direction: column;
+    width: 1600px;
+    height: 700px;
 
-    padding: 10px;
-}
-
-.score-container {
-    height: 60;
-    width: 160px;
+    background-image: url("images/other/nintendo-switch.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 1600px;
+    
 }
 
 .game-container {
     background-color: #2d2e35;
-    border-color:#000000;
-    border-width: 10px;
-    border-radius: 10px;
+    border-color: rgb(69, 69, 69);
+    border-width: 2px;
+    border-radius: 6px;
+    border-style: solid;
+
+    margin: 76px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+}
+
+.score-container {
+    height: 26px;
+    width: 160px;
+
+    position: absolute;
+    top: 0px;
+
+    color: white;
+    background-color: black;
+
+    z-index: 1;
+
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-size: 16px;
+    border-color: darkgray;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    margin-top: 2px;
+
+}
+
+.player-score-container, .opponent-score-container {
+
+    width: 80px;
+
+    /* border-color: pink;
+    border-width: 1px;
+    border-style: solid; */
 }
 
 .choose-container, .battle-container {
     width: var(--game-width);
     height: var(--game-height);
     position: relative;
-
-    border-color: aqua;
 }
 
 /* CHOOSE CONTAINER */
@@ -121,8 +165,6 @@ button {
     background-color: black;
     display: flex;
     justify-content: center;
-
-    /* display: none; */
 }
 
 .grass-column, .fire-column, .water-column {
@@ -138,8 +180,6 @@ button {
 .grass-icon-container, .fire-icon-container, .water-icon-container {
     width: auto;
     margin: 15px 15px ;
-
-    border-color: pink;
 }
 
 .grass-icon-image, .fire-icon-image, .water-icon-image {
@@ -150,10 +190,7 @@ button {
 .grass-pokeball-container, .fire-pokeball-container, .water-pokeball-container {
     width: 60%;
     height: auto;
-
-    border-color: red;
     position: relative;
-
     overflow: hidden;
 }
 
@@ -263,7 +300,7 @@ button {
 }
 
 .player-pokemon-container {
-    z-index: 3;
+    z-index: 2;
 
     left: 0px;
     bottom: 0px;
@@ -299,7 +336,7 @@ button {
 ======================================================= */
 
 .attack-container {
-    z-index: 2;
+    z-index: 3;
 
     width: var(--game-width);
     height: var(--game-height);
@@ -324,6 +361,7 @@ button {
 
 .text-container-border {
     height: 156px;
+    width: 740px;
     background-color: #d04838;
     margin: 6px;
     padding: 6px 12px;
@@ -340,12 +378,12 @@ button {
     width: 100%;
     background-color: #589098;
     color: #f4f5f6;
-    font-size: 32px;
+    font-size: 42px;
+    line-height: 1.4;
     border-radius: 10px;
     padding: 20px 30px;
     text-align: left;
     text-shadow: 3px 3px 2px black;
-    
 }
 
 /* =======================================================
@@ -355,6 +393,10 @@ button {
 .footer {
     height: 60;
     width: calc(var(--game-width) + 20px);
+
+    border-color: white;
+    border-width: 2px;
+    border-style: solid;
 }
 
 
