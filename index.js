@@ -373,8 +373,8 @@ function startBattleAnimation(roundWinner) {
 
         // divScoreContainer.innerHTML = `<span style="color: red">RED: </span>&nbsp${player.score}&nbsp&nbsp&nbsp&nbsp&nbsp<span style="color: rgb(0, 96, 255)">BLUE: </span>&nbsp${opponent.score}`;
 
-        divPlayerScoreContainer.innerHTML = `<span style="color: red">RED:</span>&nbsp${player.score}`;
-        divOpponentScoreContainer.innerHTML = `<span style="color: rgb(0, 96, 255)">BLUE:</span>&nbsp${opponent.score}`;
+        divPlayerScoreContainer.innerHTML = `<span style="color: lightcoral">RED:</span>&nbsp&nbsp${player.score}`;
+        divOpponentScoreContainer.innerHTML = `<span style="color: lightblue">BLUE:</span>&nbsp&nbsp${opponent.score}`;
 
     }, 1000);
 
