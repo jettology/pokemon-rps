@@ -109,12 +109,14 @@ const opponentPokemonImage = document.querySelector(".opponent-pokemon-image");
 // Divs
 // ********************
 
+// switch container
+const divSwitchContainer = document.querySelector(".switch-container");
 // start container
 const divStartContainer = document.querySelector(".start-container");
 // intro container
 const divIntroContainer = document.querySelector(".intro-container");
 // overall game container
-const divSwitchContainer = document.querySelector(".switch-container");
+const divGameContainer = document.querySelector(".game-container");
 // score container
 const divScoreContainer = document.querySelector(".score-container");
 const divPlayerScoreContainer = document.querySelector(".player-score-container");
@@ -139,18 +141,13 @@ const roundDuration = 5000;
 // Check for "START" and transition to animation
 // ======================================================================
 
-// temp: get rid of START animation for faster testing
-divStartContainer.style.display = "none";
-divIntroContainer.style.display = "none";
-divSwitchContainer.style.display = "flex";
-
 btnStart.addEventListener('click', transitionIntro);
 
 function transitionIntro() {
     divStartContainer.style.display = "none";    // hide Start button
     divIntroContainer.style.display = "none";   // show Intro div
 
-    divSwitchContainer.style.display = "flex";    // show main game container
+    divGameContainer.style.display = "flex";    // show main game container
 }
 
 // ======================================================================

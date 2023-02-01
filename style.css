@@ -9,11 +9,29 @@
     src: url("fonts/Pokemon\ Classic.ttf")
 }
 
+
+@font-face {
+    font-family: Projects;
+    src: url("fonts/PROJECTS.TTF")
+}
+
+
+@font-face {
+    font-family: Plastique;
+    src: url("fonts/PLASTIQUE.TTF")
+}
+
+
+
 /* Global CSS variables */
 :root {
     --intro-pixel-size: 3;
     --game-width: 780px;
-    --game-height: 364px;
+    --game-height: 546px;
+    --battle-width: 780px;
+    --battle-height: 364px;
+    --text-width: 740px;
+    --text-height: 156px;
     --data-box-size: 3;
     --pokemon-size: 1.2;
 }
@@ -37,40 +55,28 @@ div {
 }
 
 .pokemon-title {
-    margin-top: 10px;
-    width: 250px;
+    /* margin-top: 10px;
+    width: 250px; */
 }
 
-.subtitle {
-    font-size: 32px;
+.title {
+    /* font-family: Plastique; */
+    font-family: Projects;
+
+    margin-top: 10px;
+    font-size: 42px;
     color: white;
     text-shadow: 3px 3px 3px red;
 }
 
-/* =======================================================
-   Start + Intro
-======================================================= */
+.subtitle {
+    font-family: Plastique;
+    margin-top: 10px;
 
-.start-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 200px;
-    height: 50px;
-    margin: auto;
+    font-size: 16px;
+    color: white;
+    text-shadow: 3px 3px 3px red;
 }
-
-.intro-container {
-    width: auto;
-    height: 200px;
-
-    display: flex;
-    justify-content: center;
-}
-
-/* =======================================================
-   Main Container
-======================================================= */
 
 .switch-container {
     display: flex;
@@ -84,6 +90,68 @@ div {
     background-position: center;
     background-size: 1600px;
 }
+
+/* =======================================================
+   Pregame Container: Intro + Start
+======================================================= */
+
+.pregame-container {
+    background-color: #2d2e35;
+    border-color: rgb(69, 69, 69);
+    border-width: 2px;
+    border-radius: 6px;
+    border-style: solid;
+
+    margin: 76px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+    width: var(--game-width);
+    height: var(--game-height);
+
+    border-color: pink;
+    border-width: 1px;
+    border-style: solid;
+
+    /* display: none; */
+}
+
+
+.start-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 50px;
+    margin: auto;
+
+    border-color: white;
+    border-width: 1px;
+    border-style: solid;
+
+    /* display: none; */
+}
+
+.intro-container {
+    width: auto;
+    height: 200px;
+
+    display: flex;
+    justify-content: center;
+
+    border-color: white;
+    border-width: 1px;
+    border-style: solid;
+
+    /* display: none; */
+}
+
+/* =======================================================
+   Game Container: Choose + Battle
+======================================================= */
 
 .game-container {
     background-color: #2d2e35;
@@ -99,8 +167,97 @@ div {
     align-items: center;
     position: relative;
 
+    width: var(--game-width);
+    height: var(--game-height);
+
+    /* TEST */
+    display: none;
 }
 
+.choose-container,
+.battle-container {
+    width: var(--battle-width);
+    height: var(--battle-height);
+    position: relative;
+}
+
+/* BATTLE CONTAINER */
+.battle-container {
+    /* hide battle container until battle starts */
+    display: none;
+}
+
+.battle-image {
+    width: var(--battle-width);
+    max-height: 100%;
+}
+
+/* CHOOSE CONTAINER */
+.choose-container {
+    position: relative;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+}
+
+.grass-column,
+.fire-column,
+.water-column {
+    height: 100%;
+    width: calc(var(--game-width)/4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 30px;
+}
+
+/* CHOOSE ICON */
+.grass-icon-container,
+.fire-icon-container,
+.water-icon-container {
+    width: auto;
+    margin: 15px 15px;
+}
+
+.grass-icon-image,
+.fire-icon-image,
+.water-icon-image {
+    height: 100%;
+    width: 100%;
+}
+
+/* CHOOSE POKéBALL */
+.grass-pokeball-container,
+.fire-pokeball-container,
+.water-pokeball-container {
+    width: 60%;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.grass-pokeball-image,
+.fire-pokeball-image,
+.water-pokeball-image {
+    height: 100px;
+    width: 100px;
+}
+
+.grass-effect-image,
+.fire-effect-image,
+.water-effect-image {
+    width: 100px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 8px;
+    pointer-events: none;
+    animation: moveSpriteSheet_Y 1300ms steps(12) infinite;
+}
+
+/* SCORE CONTAINER */
 .score-container {
     height: 32px;
     width: 180px;
@@ -115,7 +272,8 @@ div {
     font-size: 21px;
 }
 
-.player-score-container, .opponent-score-container {
+.player-score-container,
+.opponent-score-container {
     padding-top: 2px;
     padding-left: 10px;
     text-align: left;
@@ -138,81 +296,12 @@ div {
     border-color: lightblue;
 }
 
-
-
-
-.choose-container, .battle-container {
-    width: var(--game-width);
-    height: var(--game-height);
-    position: relative;
-}
-
-/* CHOOSE CONTAINER */
-.choose-container {
-    position: relative;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-}
-
-.grass-column, .fire-column, .water-column {
-    height: 100%;
-    width: calc(var(--game-width)/4);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0px 30px;
-}
-
-.grass-icon-container, .fire-icon-container, .water-icon-container {
-    width: auto;
-    margin: 15px 15px ;
-}
-
-.grass-icon-image, .fire-icon-image, .water-icon-image {
-    height: 100%;
-    width: 100%;
-}
-
-.grass-pokeball-container, .fire-pokeball-container, .water-pokeball-container {
-    width: 60%;
-    height: auto;
-    position: relative;
-    overflow: hidden;
-}
-
-.grass-pokeball-image, .fire-pokeball-image, .water-pokeball-image {
-    height: 100px;
-    width: 100px;
-}
-
-.grass-effect-image, .fire-effect-image, .water-effect-image {
-    width: 100px;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 8px;
-    pointer-events: none;
-    animation: moveSpriteSheet_Y 1300ms steps(12) infinite;
-}
-
-/* BATTLE CONTAINER */
-.battle-container {
-    display: none;
-}
-
-.battle-image {
-    width: var(--game-width);
-    max-height: 100%;
-}
-
 /* =======================================================
    Databoxes
 ======================================================= */
 
-.player-data-container, .opponent-data-container {
+.player-data-container,
+.opponent-data-container {
     z-index: 4;
 
     font-family: Pokemon-Gen3;
@@ -244,11 +333,13 @@ div {
     margin-left: 30px;
 }
 
-.player-data-image, .opponent-data-image {
+.player-data-image,
+.opponent-data-image {
     width: 100%;
 }
 
-.player-hp-container, .opponent-hp-container {
+.player-hp-container,
+.opponent-hp-container {
     position: absolute;
     width: 142px;
     height: 9px;
@@ -264,7 +355,8 @@ div {
     right: 39px;
 }
 
-.player-hp-image, .opponent-hp-image {
+.player-hp-image,
+.opponent-hp-image {
     width: 100%;
     min-height: 100%;
     max-height: 100%;
@@ -273,15 +365,21 @@ div {
 }
 
 @keyframes deplete-hp {
-    from {width: 100%;}
-    to {width: 0%;}
+    from {
+        width: 100%;
+    }
+
+    to {
+        width: 0%;
+    }
 }
 
 /* =======================================================
    Pokemon
 ======================================================= */
 
-.player-pokemon-container, .opponent-pokemon-container {
+.player-pokemon-container,
+.opponent-pokemon-container {
     width: 100px;
     height: 100px;
     position: absolute;
@@ -315,7 +413,8 @@ div {
     margin-right: 115px;
 }
 
-.player-pokemon-image, .opponent-pokemon-image {
+.player-pokemon-image,
+.opponent-pokemon-image {
     height: 100%;
 }
 
@@ -326,8 +425,8 @@ div {
 .attack-container {
     z-index: 3;
 
-    width: var(--game-width);
-    height: var(--game-height);
+    width: var(--battle-width);
+    height: var(--battle-height);
     position: absolute;
 
     top: 0px;
@@ -348,8 +447,8 @@ div {
 ======================================================= */
 
 .text-container-border {
-    height: 156px;
-    width: 740px;
+    height: var(--text-height);
+    width: var(--text-width);
     background-color: #d04838;
     margin: 6px;
     padding: 6px 12px;
@@ -380,15 +479,16 @@ div {
 
 .footer {
     font-size: 22px;
-    /* width: calc(var(--game-width) + 20px); */
 }
 
 .sources {
-    font-size: 16px;
+    margin-top: 4px;
+    font-size: 12px;
     color: lightblue;
 }
 
-a:link, a:visited {
+a:link,
+a:visited {
     color: lightcoral;
 }
 
