@@ -111,10 +111,8 @@ const opponentPokemonImage = document.querySelector(".opponent-pokemon-image");
 
 // switch container
 const divSwitchContainer = document.querySelector(".switch-container");
-// start container
-const divStartContainer = document.querySelector(".start-container");
-// intro container
-const divIntroContainer = document.querySelector(".intro-container");
+// pregame container
+const divPregameContainer = document.querySelector(".pregame-container");
 // overall game container
 const divGameContainer = document.querySelector(".game-container");
 // score container
@@ -144,8 +142,7 @@ const roundDuration = 5000;
 btnStart.addEventListener('click', transitionIntro);
 
 function transitionIntro() {
-    divStartContainer.style.display = "none";    // hide Start button
-    divIntroContainer.style.display = "none";   // show Intro div
+    divPregameContainer.style.display = "none";    // hide pregame screen
 
     divGameContainer.style.display = "flex";    // show main game container
 }
@@ -438,16 +435,3 @@ function changeDataboxHp(trainerDataImage) {
     let newImage = oldImage.slice(0, oldImage.length - 4) + "-Fainted.png";
     setTimeout(() => { trainerDataImage.src = newImage; }, hpDepletionDuration);
 }
-
-
-
-
-// btn.addEventListener('click', function () {
-//     startContainer.style.opacity = 0;
-//     startContainer.style.transform = 'scale(0)';
-//     // Add timeout with length matching animation-duration 
-//     window.setTimeout(function () {
-//         startContainer.style.display = 'none';
-//     }, 700);
-//     setTimeout(() => { typeWriter(); }, 1000);
-// });

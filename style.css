@@ -34,6 +34,9 @@
     --text-height: 156px;
     --data-box-size: 3;
     --pokemon-size: 1.2;
+
+    --intro-bg-y-position: 50%;
+
 }
 
 body {
@@ -96,7 +99,8 @@ div {
 ======================================================= */
 
 .pregame-container {
-    background-color: #2d2e35;
+    /* background-color: #2d2e35; */
+    background-color: black;
     border-color: rgb(69, 69, 69);
     border-width: 2px;
     border-radius: 6px;
@@ -112,15 +116,69 @@ div {
     width: var(--game-width);
     height: var(--game-height);
 
-    border-color: pink;
+    /* border-color: pink;
     border-width: 1px;
-    border-style: solid;
+    border-style: solid; */
 
     /* display: none; */
 }
 
+/* =======================================================
+   Sliding Background
+======================================================= */
+.sliding-background {
+    background: url("images/background/4.png"), url("images/background/3.png"), url("images/background/2.png"), url("images/background/1.png");
 
-.start-container {
+    background-repeat: repeat-x;
+    background-position: 130% var(--intro-bg-y-position);
+    height: var(--game-height);
+    width: var(--game-width);
+    animation: slideIntroBackground 16s linear infinite;
+}
+
+@keyframes slideIntroBackground {
+    100% {
+        background-position:
+            -432% var(--intro-bg-y-position),
+            -151% var(--intro-bg-y-position),
+            130% var(--intro-bg-y-position),
+            130% var(--intro-bg-y-position);
+    }
+}
+
+.intro-background-container {
+    overflow: hidden;
+    /* display: none; */
+
+    border-color: white;
+    border-width: 1px;
+    border-style: solid;
+
+}
+
+/* =======================================================
+   Red Trainer Running Animation
+======================================================= */
+
+.intro-red-trainer {
+    width: calc(54px * var(--intro-pixel-size));
+    height: calc(53px * var(--intro-pixel-size));
+    overflow: hidden;
+    position: absolute;
+    bottom: 118px;
+    left: 308px;
+}
+
+.red-running-spriteSheet {
+    animation: moveSpriteSheet_X 800ms steps(6) infinite;
+    width: calc(324px * var(--intro-pixel-size));
+}
+
+/* =======================================================
+   Start Button
+======================================================= */
+
+.start-button-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -128,26 +186,34 @@ div {
     height: 50px;
     margin: auto;
 
-    border-color: white;
-    border-width: 1px;
-    border-style: solid;
+    position: absolute;
+    top: 26%;
 
     /* display: none; */
 }
 
-.intro-container {
-    width: auto;
-    height: 200px;
+#startbutton {
+    font-family: Plastique;
+    font-size: medium;
+    color: darkred;
+    background: none;
+    border-style: none;
 
-    display: flex;
-    justify-content: center;
-
-    border-color: white;
-    border-width: 1px;
-    border-style: solid;
-
-    /* display: none; */
+    animation: glow 3s ease-in-out infinite alternate;
 }
+
+#startbutton:hover {
+    color: white;
+}
+
+@keyframes glow {
+    from {
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+    }
+    to {
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff4d4d, 0 0 40px #ff4d4d, 0 0 50px #ff4d4d, 0 0 60px #ff4d4d, 0 0 70px #ff4d4d;
+    }
+  }
 
 /* =======================================================
    Game Container: Choose + Battle
@@ -493,20 +559,7 @@ a:visited {
 }
 
 
-/* =======================================================
-   Red Trainer Running Animation
-======================================================= */
 
-.intro-red-trainer {
-    width: calc(54px * var(--intro-pixel-size));
-    height: calc(53px * var(--intro-pixel-size));
-    overflow: hidden;
-}
-
-.red-running-spriteSheet {
-    animation: moveSpriteSheet_X 800ms steps(6) infinite;
-    width: calc(324px * var(--intro-pixel-size));
-}
 
 /* =======================================================
    Sprites + Animation
