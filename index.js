@@ -28,7 +28,6 @@ const opponent = {
     score: 0
 }
 
-
 // ======================================================================
 // Variable instantiations
 // ======================================================================
@@ -36,9 +35,9 @@ const opponent = {
 // ********************
 // Rock Paper Scissors
 // ********************
+
 let currentRound = 1;
 const numRoundsToWin = 3;
-
 
 // ********************
 // Buttons
@@ -50,6 +49,14 @@ const btnStart = document.querySelector("#startbutton");
 // Sources 
 // ********************
 
+// pokemon sources
+const srcVenusaurPlayer = "images/pokemon/venusaur_player.png";
+const srcVenusaurOpponent = "images/pokemon/venusaur_opponent.png";
+const srcCharizardPlayer = "images/pokemon/charizard_player.png";
+const srcCharizardOpponent = "images/pokemon/charizard_opponent.png";
+const srcBlastoisePlayer = "images/pokemon/blastoise_player.png";
+const srcBlastoiseOpponent = "images/pokemon/blastoise_opponent.png";
+
 // moves sources
 const srcLeafBladePlayer = "images/moves/Player-Leaf-Blade.png";
 const srcLeafBladeOpponent = "images/moves/Opponent-Leaf-Blade.png";
@@ -60,14 +67,7 @@ const srcFireBlastOpponent = "images/moves/Opponent-Fire-Blast.png";
 const srcHydroCannonPlayer = "images/moves/Player-Hydro-Cannon.png";
 const srcHydroCannonOpponent = "images/moves/Opponent-Hydro-Cannon.png";
 
-// pokemon sources
-const srcVenusaurPlayer = "images/pokemon/venusaur_player.png";
-const srcVenusaurOpponent = "images/pokemon/venusaur_opponent.png";
-const srcCharizardPlayer = "images/pokemon/charizard_player.png";
-const srcCharizardOpponent = "images/pokemon/charizard_opponent.png";
-const srcBlastoisePlayer = "images/pokemon/blastoise_player.png";
-const srcBlastoiseOpponent = "images/pokemon/blastoise_opponent.png";
-
+// databox sources
 const srcPlayerDataboxVenusaur = "images/battle-ui/Player-Databox-Venusaur.png";
 const srcPlayerDataboxCharizard = "images/battle-ui/Player-Databox-Charizard.png";
 const srcPlayerDataboxBlastoise = "images/battle-ui/Player-Databox-Blastoise.png";
@@ -76,6 +76,7 @@ const srcOpponentDataboxVenusaur = "images/battle-ui/Opponent-Databox-Venusaur.p
 const srcOpponentDataboxCharizard = "images/battle-ui/Opponent-Databox-Charizard.png";
 const srcOpponentDataboxBlastoise = "images/battle-ui/Opponent-Databox-Blastoise.png";
 
+// trainer sources
 const srcRedWinner = "images/winner/red-victory.png";
 const srcBlueWinner = "images/winner/blue-victory.png";
 
@@ -105,9 +106,8 @@ const waterEffectImage = document.querySelector(".water-effect-image");
 const playerPokemonImage = document.querySelector(".player-pokemon-image");
 const opponentPokemonImage = document.querySelector(".opponent-pokemon-image");
 
-// winner images
+// winner image
 const resultsImage = document.querySelector(".results-image");
-
 
 // ********************
 // Divs
@@ -134,19 +134,8 @@ const divTextContainer = document.querySelector(".text-container");
 // results container
 const divResultsContainer = document.querySelector(".results-container");
 
-
 // ======================================================================
-// Other variables
-// ======================================================================
-const attackDuration = 2400;
-const hpDepletionDuration = 2400;
-const roundDuration = 9000;
-const roundTieDuration = 4500;
-
-let isIntroState = false;
-
-// ======================================================================
-// Sound
+// Sounds + Music
 // ======================================================================
 const audioBattleBGM = document.querySelector(".battle-bgm");
 const audioTieBGM = document.querySelector(".tie-bgm");
@@ -163,37 +152,11 @@ const audioVictoryFX = document.querySelector(".victory-fx");
 const audioExplainBGM = document.querySelector(".explain-bgm");
 const audioStartBGM = document.querySelector(".start-bgm");
 
-
-
-// ======================================================================
-// Check for "START" and transition to animation
-// ======================================================================
-
-
-btnStart.addEventListener('click', transitionIntro);
-
-function transitionIntro() {
-
-    playNintendoSound();
-
-    stopStartMusic();
-
-    setTimeout( () => {
-        playExplainMusic();
-        divIntroContainer.style.display = "none";   // hide intro screen
-        divFaceoffContainer.style.display = "flex"; // show faceoff screen
-        startIntroTextMessages();
-    
-        divGameContainer.style.display = "flex";    // show main game container
-    
-        divPlayerScoreContainer.innerHTML = `<span style="color: lightcoral">RED:</span>&nbsp&nbsp${player.score}`;
-        divOpponentScoreContainer.innerHTML = `<span style="color: lightblue">BLUE:</span>&nbsp&nbsp${opponent.score}`;
-    }, 1500);
-}
-
 // ======================================================================
 // Text Container Messages
 // ======================================================================
+
+// messages used during the introduction
 const intro_1 = "Rival BLUE challenges you to a battle!";
 const intro_2_A = "The rules abide by classic Ro-Sham-Bo";
 const intro_2_B = "standards."
@@ -214,260 +177,37 @@ const red_winner_2 = "You are the new champion!";
 const blue_winner_1 = "Rival BLUE is the champion.";
 const blue_winner_2 = "Better luck next time."
 
+// ======================================================================
+// Duration
+// ======================================================================
+const attackDuration = 2400;
+const hpDepletionDuration = 2400;
+const roundDuration = 9000;
+const roundTieDuration = 4500;
 
+// ======================================================================
+// Other
+// ======================================================================
+
+// checks if in intro state; used for preventing ENTER press
+let isIntroState = false;   
+
+// array for the timeouts used in the intro text sequence
 let introTimeouts = [];
-
-function startIntroTextMessages() {
-
-    isIntroState = true;
-
-    introTimeouts.push(setTimeout(() => { displayNewMessage(intro_1); }, 100));
-    introTimeouts.push(setTimeout(() => { displayTwoLineMessage(intro_2_A, intro_2_B); }, 2600));
-    introTimeouts.push(setTimeout(() => { displayTwoLineMessage(intro_3_A, intro_3_B); }, 6000));
-    introTimeouts.push(setTimeout(() => { displayTwoLineMessage(intro_4_A, intro_4_B); }, 9000));
-    introTimeouts.push(setTimeout(() => { displayNewMessage(intro_5); }, 14000));
-    introTimeouts.push(setTimeout(() => { playSelectSound(); }, 14000));
-    introTimeouts.push(setTimeout(() => { displayAddonMessage(intro_6); }, 15000));
-    introTimeouts.push(setTimeout(() => { playSelectSound(); }, 15000));
-    introTimeouts.push(setTimeout(() => { displayAddonMessage(intro_7); }, 16000));
-    introTimeouts.push(setTimeout(() => { playSelectSound(); }, 16000));
-    introTimeouts.push(setTimeout(() => { displayAddonMessage(intro_8); }, 17000));
-    introTimeouts.push(setTimeout(() => { playStartSound(); }, 17000));
-
-    // transition to battle
-    introTimeouts.push(setTimeout(stopExplainMusic, 18000));
-    introTimeouts.push(setTimeout(transitionBattle, 18000));
-
-    setTimeout( () => { isIntroState = false; }, 18000);
-
-    // setTimeout(transitionBattle, 500);
-}
-
-
-// Skip explanation
-window.addEventListener("keydown", enterKeyDown);
-
-function enterKeyDown(event) {
-    if (event.keyCode == 13 && isIntroState) {
-
-        isIntroState = false;
-
-        for(let i=0; i<introTimeouts.length; i++) {
-            clearTimeout(introTimeouts[i]);
-        }
-        introTimeouts = [];
-
-        displayNewMessage("");
-
-        setTimeout( () => {
-            displayNewMessage("");
-
-            stopExplainMusic();
-            transitionBattle();
-    
-            divGameContainer.style.display = "flex";    // show main game container
-            divPlayerScoreContainer.innerHTML = `<span style="color: lightcoral">RED:</span>&nbsp&nbsp${player.score}`;
-            divOpponentScoreContainer.innerHTML = `<span style="color: lightblue">BLUE:</span>&nbsp&nbsp${opponent.score}`;
-        }, 1000);
-    }
- }
-
 
 // Returns a Promise that resolves after "ms" Milliseconds
 const timer = ms => new Promise(res => setTimeout(res, ms))
 
-async function displayNewMessage(msg) {
-
-    divTextContainer.innerHTML = "";
-
-    let i = 0;
-
-    grassPokeballImage.style.pointerEvents = "none";
-    firePokeballImage.style.pointerEvents = "none";
-    waterPokeballImage.style.pointerEvents = "none";
-
-
-    while (i < msg.length) {
-        divTextContainer.innerHTML += msg.charAt(i);
-        i++;
-        await timer(25);
-    }
-
-    grassPokeballImage.style.pointerEvents = "auto";
-    firePokeballImage.style.pointerEvents = "auto";
-    waterPokeballImage.style.pointerEvents = "auto";
-}
-
-async function displayAddonMessage(msg) {
-
-    let i = 0;
-
-    while (i < msg.length) {
-        divTextContainer.innerHTML += msg.charAt(i);
-        i++;
-        await timer(25);
-    }
-}
-
-async function displayTwoLineMessage(msg1, msg2) {
-
-    divTextContainer.innerHTML = "";
-
-    let i = 0;
-
-    while (i < msg1.length) {
-        divTextContainer.innerHTML += msg1.charAt(i);
-        i++;
-        await timer(25);
-    }
-
-    divTextContainer.innerHTML += "<br>";
-
-    i = 0;
-
-    while (i < msg2.length) {
-        divTextContainer.innerHTML += msg2.charAt(i);
-        i++;
-        await timer(25);
-    }
-
-}
-
-function transitionBattle() {
-
-    resetRound();
-
-    // turn off faceoff container
-    divFaceoffContainer.style.display = "none";
-    // turn on choice, score
-    divChooseContainer.style.display = "flex";
-    divScoreContainer.style.display = "flex";
-
-}
-
 // ======================================================================
-// Reset Round Container
-// ======================================================================
-function resetRound() {
-    displayNewMessage("");
-    displayNewMessage("Choose your Pokémon!");
-
-    setHpFull(playerHpImage);
-    setHpFull(opponentHpImage);
-
-    playChooseMusic();
-}
-
-
-// ======================================================================
-// Choose Pokemon
+// Event Listeners
 // ======================================================================
 
-function setAttackImage(trainer, type) {
-    if (trainer === player) {
-        switch (type) {
-            case 'grass':
-                attackImage.src = srcLeafBladePlayer;
-                break;
-            case 'fire':
-                attackImage.src = srcFireBlastPlayer;
-                break;
-            case 'water':
-                attackImage.src = srcHydroCannonPlayer;
-                break;
-            default:
-                console.error("Invalid choice.");
-        }
-    }
-    else if (trainer === opponent) {
-        switch (type) {
-            case 'grass':
-                attackImage.src = srcLeafBladeOpponent;
-                break;
-            case 'fire':
-                attackImage.src = srcFireBlastOpponent;
-                break;
-            case 'water':
-                attackImage.src = srcHydroCannonOpponent;
-                break;
-            default:
-                console.error("Invalid choice.");
-        }
-    }
-}
+// check for START (start the match)
+btnStart.addEventListener('click', transitionIntro);
 
-function setPlayerParameters(type) {
-    switch (type) {
-        case 'grass':
-            player.pokemon.name = 'VENUSAUR';
-            player.pokemon.type = 'grass';
-            player.pokemon.move = 'LEAF BLADE';
-            playerPokemonImage.src = srcVenusaurPlayer;
-            playerDataImage.src = srcPlayerDataboxVenusaur;
-            break;
-        case 'fire':
-            player.pokemon.name = 'CHARIZARD';
-            player.pokemon.type = 'fire';
-            player.pokemon.move = 'FIRE BLAST';
-            playerPokemonImage.src = srcCharizardPlayer;
-            playerDataImage.src = srcPlayerDataboxCharizard;
-            break;
-        case 'water':
-            player.pokemon.name = 'BLASTOISE';
-            player.pokemon.type = 'water';
-            player.pokemon.move = 'HYDRO CANNON';
-            playerPokemonImage.src = srcBlastoisePlayer;
-            playerDataImage.src = srcPlayerDataboxBlastoise;
-            break;
-        default:
-            console.error("Invalid choice.")
-    }
-}
-
-function setOpponentParameters(type) {
-    switch (type) {
-        case 'grass':
-            opponent.pokemon.name = 'VENUSAUR';
-            opponent.pokemon.type = 'grass';
-            opponent.pokemon.move = 'LEAF BLADE';
-            opponentPokemonImage.src = srcVenusaurOpponent;
-            opponentDataImage.src = srcOpponentDataboxVenusaur;
-            break;
-        case 'fire':
-            opponent.pokemon.name = 'CHARIZARD';
-            opponent.pokemon.type = 'fire';
-            opponent.pokemon.move = 'FIRE BLAST';
-            opponentPokemonImage.src = srcCharizardOpponent;
-            opponentDataImage.src = srcOpponentDataboxCharizard;
-            break;
-        case 'water':
-            opponent.pokemon.name = 'BLASTOISE';
-            opponent.pokemon.type = 'water';
-            opponent.pokemon.move = 'HYDRO CANNON';
-            opponentPokemonImage.src = srcBlastoiseOpponent;
-            opponentDataImage.src = srcOpponentDataboxBlastoise;
-            break;
-        default:
-            console.error("Invalid choice.")
-    }
-}
-
-function chooseOpponentPokemon() {
-    let r = Math.floor(Math.random() * 3);
-    switch (r) {
-        case 0:
-            setOpponentParameters('grass');
-            break;
-        case 1:
-            setOpponentParameters('fire');
-            break;
-        case 2:
-            setOpponentParameters('water');
-            break;
-        default:
-            console.error("Invalid opponent pokemon choice.")
-    }
-}
+// check for ENTER (skip explanation)
+// Skip explanation
+window.addEventListener("keydown", enterKeyDown);
 
 // grass pokeball
 grassPokeballImage.addEventListener('mouseover', () => {
@@ -515,6 +255,296 @@ waterPokeballImage.addEventListener('click', () => {
 });
 
 
+// **********************************************************************
+// **********************************************************************
+// **********************************************************************
+// **********************************************************************
+// **********************************************************************
+// **********************************************************************
+// **********************************************************************
+
+
+// ======================================================================
+// Transitions
+// ======================================================================
+
+// from START screen to INTRO + EXPLANATION
+function transitionIntro() {
+    // removed listener to only allow ONE click
+    btnStart.removeEventListener('click', transitionIntro);
+
+    playNintendoSound();
+    stopStartMusic();
+
+    setTimeout( () => {
+        playExplainMusic();
+        divIntroContainer.style.display = "none";   // hide intro screen
+        divFaceoffContainer.style.display = "flex"; // show faceoff screen
+        startIntroTextMessages();
+        divGameContainer.style.display = "flex";    // show main game container
+    
+        // display the scores
+        divPlayerScoreContainer.innerHTML = `<span style="color: lightcoral">RED:</span>&nbsp&nbsp${player.score}`;
+        divOpponentScoreContainer.innerHTML = `<span style="color: lightblue">BLUE:</span>&nbsp&nbsp${opponent.score}`;
+    }, 1500);
+}
+
+// from INTRO + EXPLANATION to BATTLE
+function transitionBattle() {
+
+    resetRound();
+
+    // turn off faceoff container
+    divFaceoffContainer.style.display = "none";
+    // turn on choice + score
+    divChooseContainer.style.display = "flex";
+    divScoreContainer.style.display = "flex";
+}
+
+// from RESULTS to START
+function transitionStart() {
+    // reset parameters for new match
+    setTimeout(() => {
+        // reset START btn listener
+        btnStart.addEventListener('click', transitionIntro);
+        
+        displayNewMessage("");
+        player.score = 0;
+        opponent.score = 0;
+        divResultsContainer.style.display = "none";
+        divGameContainer.style.display = "none";
+        divIntroContainer.style.display = "flex";
+
+        playStartMusic();
+    }, 9000);
+}
+
+// ======================================================================
+// Introduction Text Sequence
+// ======================================================================
+
+function startIntroTextMessages() {
+
+    isIntroState = true;    // user can skip with ENTER at this point
+
+    // intro explanation
+    introTimeouts.push(setTimeout(() => { displayNewMessage(intro_1); }, 100));
+    introTimeouts.push(setTimeout(() => { displayTwoLineMessage(intro_2_A, intro_2_B); }, 2600));
+    introTimeouts.push(setTimeout(() => { displayTwoLineMessage(intro_3_A, intro_3_B); }, 6000));
+    introTimeouts.push(setTimeout(() => { displayTwoLineMessage(intro_4_A, intro_4_B); }, 9000));
+    introTimeouts.push(setTimeout(() => { displayNewMessage(intro_5); }, 14000));
+    introTimeouts.push(setTimeout(() => { playSelectSound(); }, 14000));
+    introTimeouts.push(setTimeout(() => { displayAddonMessage(intro_6); }, 15000));
+    introTimeouts.push(setTimeout(() => { playSelectSound(); }, 15000));
+    introTimeouts.push(setTimeout(() => { displayAddonMessage(intro_7); }, 16000));
+    introTimeouts.push(setTimeout(() => { playSelectSound(); }, 16000));
+    introTimeouts.push(setTimeout(() => { displayAddonMessage(intro_8); }, 17000));
+    introTimeouts.push(setTimeout(() => { playStartSound(); }, 17000));
+
+    // transition to battle scene
+    introTimeouts.push(setTimeout(stopExplainMusic, 18000));
+    introTimeouts.push(setTimeout(transitionBattle, 18000));
+
+    // user can no longer skip at this point
+    setTimeout( () => { isIntroState = false; }, 18000);
+}
+
+// ======================================================================
+// Text Container Functions
+// ======================================================================
+
+// clear out text container and write new text
+async function displayNewMessage(msg) {
+
+    divTextContainer.innerHTML = "";
+
+    // prevent clicking on pokeballs
+    grassPokeballImage.style.pointerEvents = "none";
+    firePokeballImage.style.pointerEvents = "none";
+    waterPokeballImage.style.pointerEvents = "none";
+
+    let i = 0;
+
+    // type-writer effect
+    while (i < msg.length) {
+        divTextContainer.innerHTML += msg.charAt(i);
+        i++;
+        await timer(25);
+    }
+
+    // allow clicking on pokeballs
+    grassPokeballImage.style.pointerEvents = "auto";
+    firePokeballImage.style.pointerEvents = "auto";
+    waterPokeballImage.style.pointerEvents = "auto";
+}
+
+// add text to whatever is already in the text container
+async function displayAddonMessage(msg) {
+
+    let i = 0;
+
+    while (i < msg.length) {
+        divTextContainer.innerHTML += msg.charAt(i);
+        i++;
+        await timer(25);
+    }
+}
+
+// add two rows of text
+async function displayTwoLineMessage(msg1, msg2) {
+
+    divTextContainer.innerHTML = "";
+
+    let i = 0;
+
+    while (i < msg1.length) {
+        divTextContainer.innerHTML += msg1.charAt(i);
+        i++;
+        await timer(25);
+    }
+
+    divTextContainer.innerHTML += "<br>";
+
+    i = 0;
+
+    while (i < msg2.length) {
+        divTextContainer.innerHTML += msg2.charAt(i);
+        i++;
+        await timer(25);
+    }
+}
+
+// ======================================================================
+// Reset Round
+// ======================================================================
+function resetRound() {
+    displayNewMessage("");
+    displayNewMessage("Choose your Pokémon!");
+
+    setHpFull(playerHpImage);
+    setHpFull(opponentHpImage);
+
+    playChooseMusic();
+}
+
+// ======================================================================
+// Choose Pokemon
+// ======================================================================
+
+// set which trainer's pokemon attacks w/ the appropriate move
+function setAttackImage(trainer, type) {
+    if (trainer === player) {
+        switch (type) {
+            case 'grass':
+                attackImage.src = srcLeafBladePlayer;
+                break;
+            case 'fire':
+                attackImage.src = srcFireBlastPlayer;
+                break;
+            case 'water':
+                attackImage.src = srcHydroCannonPlayer;
+                break;
+            default:
+                console.error("Invalid choice.");
+        }
+    }
+    else if (trainer === opponent) {
+        switch (type) {
+            case 'grass':
+                attackImage.src = srcLeafBladeOpponent;
+                break;
+            case 'fire':
+                attackImage.src = srcFireBlastOpponent;
+                break;
+            case 'water':
+                attackImage.src = srcHydroCannonOpponent;
+                break;
+            default:
+                console.error("Invalid choice.");
+        }
+    }
+}
+
+// set player's pokemon parameters
+function setPlayerParameters(type) {
+    switch (type) {
+        case 'grass':
+            player.pokemon.name = 'VENUSAUR';
+            player.pokemon.type = 'grass';
+            player.pokemon.move = 'LEAF BLADE';
+            playerPokemonImage.src = srcVenusaurPlayer;
+            playerDataImage.src = srcPlayerDataboxVenusaur;
+            break;
+        case 'fire':
+            player.pokemon.name = 'CHARIZARD';
+            player.pokemon.type = 'fire';
+            player.pokemon.move = 'FIRE BLAST';
+            playerPokemonImage.src = srcCharizardPlayer;
+            playerDataImage.src = srcPlayerDataboxCharizard;
+            break;
+        case 'water':
+            player.pokemon.name = 'BLASTOISE';
+            player.pokemon.type = 'water';
+            player.pokemon.move = 'HYDRO CANNON';
+            playerPokemonImage.src = srcBlastoisePlayer;
+            playerDataImage.src = srcPlayerDataboxBlastoise;
+            break;
+        default:
+            console.error("Invalid choice.")
+    }
+}
+
+// set opponent's pokemon parameters
+function setOpponentParameters(type) {
+    switch (type) {
+        case 'grass':
+            opponent.pokemon.name = 'VENUSAUR';
+            opponent.pokemon.type = 'grass';
+            opponent.pokemon.move = 'LEAF BLADE';
+            opponentPokemonImage.src = srcVenusaurOpponent;
+            opponentDataImage.src = srcOpponentDataboxVenusaur;
+            break;
+        case 'fire':
+            opponent.pokemon.name = 'CHARIZARD';
+            opponent.pokemon.type = 'fire';
+            opponent.pokemon.move = 'FIRE BLAST';
+            opponentPokemonImage.src = srcCharizardOpponent;
+            opponentDataImage.src = srcOpponentDataboxCharizard;
+            break;
+        case 'water':
+            opponent.pokemon.name = 'BLASTOISE';
+            opponent.pokemon.type = 'water';
+            opponent.pokemon.move = 'HYDRO CANNON';
+            opponentPokemonImage.src = srcBlastoiseOpponent;
+            opponentDataImage.src = srcOpponentDataboxBlastoise;
+            break;
+        default:
+            console.error("Invalid choice.")
+    }
+}
+
+// randomly choose opponent's pokemon
+function chooseOpponentPokemon() {
+    let r = Math.floor(Math.random() * 3);
+    switch (r) {
+        case 0:
+            setOpponentParameters('grass');
+            break;
+        case 1:
+            setOpponentParameters('fire');
+            break;
+        case 2:
+            setOpponentParameters('water');
+            break;
+        default:
+            console.error("Invalid opponent pokemon choice.")
+    }
+}
+
+// ======================================================================
+// Round + Match Outcomes
+// ======================================================================
+
 function determineRoundWinner() {
     chooseOpponentPokemon();
 
@@ -539,20 +569,21 @@ function determineRoundWinner() {
 }
 
 function tieRound() {
-
-    // divTextContainer.innerHTML = "It's a tie!";
-
     displayNewMessage("It's a tie!");
 
-
     playTieMusic();
-
 
     setTimeout(() => {
         resetRound();
         divBattleContainer.style.display = "none";
         divChooseContainer.style.display = "flex";
     }, roundTieDuration);
+}
+
+function awardPoint(trainer) {
+    trainer.score++;
+    divPlayerScoreContainer.innerHTML = `<span style="color: lightcoral">RED:</span>&nbsp&nbsp${player.score}`;
+    divOpponentScoreContainer.innerHTML = `<span style="color: lightblue">BLUE:</span>&nbsp&nbsp${opponent.score}`;
 }
 
 function playerWinsMatch() {
@@ -573,19 +604,6 @@ function opponentWinsMatch() {
     transitionStart();
 }
 
-function transitionStart() {
-    setTimeout(() => {
-        displayNewMessage("");
-        player.score = 0;
-        opponent.score = 0;
-        divResultsContainer.style.display = "none";
-        divGameContainer.style.display = "none";
-        divIntroContainer.style.display = "flex";
-
-        playStartMusic();
-    }, 10000);
-}
-
 // ======================================================================
 // Pokemon Battle Animation
 // ======================================================================
@@ -596,14 +614,15 @@ function startBattleAnimation(roundWinner) {
     // start battle music
     playBattleMusic();
 
-
     // change text to display move used
     let battleMessage = `${roundWinner.name}'s ${roundWinner.pokemon.name} used ${roundWinner.pokemon.move}!`;
 
+    // battle sound effects
     setTimeout(playAttackSound, 2000);
     setTimeout(playHitSound, 3000);
     setTimeout(playDeadSound, 6000);
 
+    // battle text
     setTimeout(() => { displayNewMessage(battleMessage); }, 1000);
     setTimeout(() => { displayNewMessage(battle_1); }, 6000);
 
@@ -613,6 +632,7 @@ function startBattleAnimation(roundWinner) {
         moveAnimation(roundWinner.pokemon.name);
     }, 1500);
 
+    // deplete pokemon health
     if (roundWinner === opponent) {
         setTimeout(() => {
             // Animation to deplete HP to 0
@@ -625,6 +645,7 @@ function startBattleAnimation(roundWinner) {
         setTimeout(() => { depleteHpAnimation(opponentHpImage); }, attackDuration + 900);
     }
 
+    // determine winner and award points; transition to reset round
     setTimeout(() => {
         awardPoint(roundWinner);
 
@@ -641,18 +662,13 @@ function startBattleAnimation(roundWinner) {
                 opponentWinsMatch();
             }, 1000);
         }
+        // reset round
         else {
             divBattleContainer.style.display = "none";
             resetRound();
             divChooseContainer.style.display = "flex";
         }
     }, roundDuration);
-}
-
-function awardPoint(trainer) {
-    trainer.score++;
-    divPlayerScoreContainer.innerHTML = `<span style="color: lightcoral">RED:</span>&nbsp&nbsp${player.score}`;
-    divOpponentScoreContainer.innerHTML = `<span style="color: lightblue">BLUE:</span>&nbsp&nbsp${opponent.score}`;
 }
 
 function moveAnimation(pokemon) {
@@ -672,7 +688,6 @@ function moveAnimation(pokemon) {
     setTimeout(() => { attackImage.style.display = "none"; }, attackDuration);
     setTimeout(() => { attackImage.style.animationPlayState = 'paused'; }, attackDuration);
 }
-
 
 function depleteHpAnimation(trainerHpImage) {
 
@@ -695,7 +710,7 @@ function changeDataboxHp(trainerDataImage) {
     setTimeout(() => { trainerDataImage.src = newImage; }, hpDepletionDuration);
 }
 
-// Methods to set the hp-bar
+// Functions to set the hp-bar
 function setHpFull(trainerHpImage) {
     trainerHpImage.src = "images/battle-ui/hp-full.png";
 }
@@ -712,10 +727,108 @@ function setHpEmpty(trainerHpImage) {
     trainerHpImage.src = "images/battle-ui/hp-empty.png";
 }
 
+// ======================================================================
+// Skip Explanation
+// ======================================================================
+function enterKeyDown(event) {
+    if (event.keyCode == 13 && isIntroState) {
 
+        isIntroState = false;
 
+        for(let i=0; i<introTimeouts.length; i++) {
+            clearTimeout(introTimeouts[i]);
+        }
 
-// Sound
+        introTimeouts = [];
+
+        displayNewMessage("");
+
+        setTimeout( () => {
+            displayNewMessage("");
+
+            stopExplainMusic();
+            transitionBattle();
+    
+            divGameContainer.style.display = "flex";    // show main game container
+            divPlayerScoreContainer.innerHTML = `<span style="color: lightcoral">RED:</span>&nbsp&nbsp${player.score}`;
+            divOpponentScoreContainer.innerHTML = `<span style="color: lightblue">BLUE:</span>&nbsp&nbsp${opponent.score}`;
+        }, 1000);
+    }
+ }
+
+// ======================================================================
+// Sound + Music
+// ======================================================================
+
+// =============
+// SOUND
+// =============
+function playNintendoSound() {
+    audioNintendoFX.play();
+}
+
+function playSelectSound() {
+    audioSelectFX.play();
+}
+
+function playStartSound() {
+    audioStartFX.play();
+}
+
+function playAttackSound() {
+    audioAttackFX.play();
+}
+
+function playHitSound() {
+    audioHitFX.play();
+}
+
+function playDeadSound() {
+    audioDeadFX.play();
+}
+
+function playEndSound() {
+    audioEndFX.play();
+}
+
+function playGameOverSound() {
+    audioGameOverFX.play();
+}
+
+function playVictorySound() {
+    audioVictoryFX.play();
+}
+
+// =============
+// MUSIC
+// =============
+function playStartMusic() {
+    audioStartBGM.play();
+}
+
+function stopStartMusic() {
+    audioStartBGM.pause();
+    audioStartBGM.currentTime = 0;
+}
+
+function playExplainMusic() {
+    audioExplainBGM.play();
+}
+
+function stopExplainMusic() {
+    audioExplainBGM.pause();
+    audioExplainBGM.currentTime = 0;
+}
+
+function playChooseMusic() {
+    audioChooseBGM.play();
+}
+
+function stopChooseMusic() {
+    audioChooseBGM.pause();
+    audioChooseBGM.currentTime = 0;
+}
+
 function playBattleMusic() {
     stopChooseMusic();
 
@@ -737,67 +850,3 @@ function playTieMusic() {
         audioTieBGM.currentTime = 0;
     }, roundTieDuration);
 }
-
-function playNintendoSound() {
-    audioNintendoFX.play();
-}
-
-function playSelectSound() {
-    audioSelectFX.play();
-}
-
-function playAttackSound() {
-    audioAttackFX.play();
-}
-
-function playHitSound() {
-    audioHitFX.play();
-}
-
-function playDeadSound() {
-    audioDeadFX.play();
-}
-
-function playChooseMusic() {
-    audioChooseBGM.play();
-}
-
-function stopChooseMusic() {
-    audioChooseBGM.pause();
-    audioChooseBGM.currentTime = 0;
-}
-
-function playStartMusic() {
-    audioStartBGM.play();
-}
-
-function stopStartMusic() {
-    audioStartBGM.pause();
-    audioStartBGM.currentTime = 0;
-}
-
-function playStartSound() {
-    audioStartFX.play();
-}
-
-function playEndSound() {
-    audioEndFX.play();
-}
-
-function playGameOverSound() {
-    audioGameOverFX.play();
-}
-
-function playVictorySound() {
-    audioVictoryFX.play();
-}
-
-function playExplainMusic() {
-    audioExplainBGM.play();
-}
-
-function stopExplainMusic() {
-    audioExplainBGM.pause();
-    audioExplainBGM.currentTime = 0;
-}
-

@@ -30,9 +30,7 @@
     --text-height: 156px;
     --data-box-size: 3;
     --pokemon-size: 1.2;
-
     --intro-bg-y-position: 50%;
-
 }
 
 body {
@@ -54,9 +52,7 @@ div {
 }
 
 .title {
-    /* font-family: Plastique; */
     font-family: Projects;
-
     margin-top: 10px;
     font-size: 42px;
     color: white;
@@ -66,7 +62,6 @@ div {
 .subtitle {
     font-family: Plastique;
     margin-top: 10px;
-
     font-size: 16px;
     color: white;
     text-shadow: 3px 3px 3px red;
@@ -90,36 +85,24 @@ div {
 ======================================================= */
 
 .intro-container {
-    /* background-color: #2d2e35; */
     background-color: black;
     border-color: rgb(69, 69, 69);
     border-width: 2px;
     border-radius: 6px;
     border-style: solid;
-
     margin: 76px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-
     width: var(--game-width);
     height: var(--game-height);
-
-    /* border-color: pink;
-    border-width: 1px;
-    border-style: solid; */
-
-    /* display: none; */
 }
 
 .quote-container {
     position: absolute;
     bottom: 5%;
     font-size: 18px;
-    /* width: 400px;
-    height: 50px; */
 }
 
 /* =======================================================
@@ -147,12 +130,9 @@ div {
 
 .intro-background-container {
     overflow: hidden;
-    /* display: none; */
-
     border-color: white;
     border-width: 1px;
     border-style: solid;
-
 }
 
 /* =======================================================
@@ -184,11 +164,8 @@ div {
     width: 200px;
     height: 50px;
     margin: auto;
-
     position: absolute;
     top: 42%;
-
-    /* display: none; */
 }
 
 #startbutton {
@@ -198,7 +175,6 @@ div {
     background: none;
     border-style: none;
     padding: 10px;
-
     animation: glow 3s ease-in-out infinite alternate;
 }
 
@@ -226,18 +202,13 @@ div {
     border-width: 2px;
     border-radius: 6px;
     border-style: solid;
-
     margin: 76px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-
     width: var(--game-width);
     height: var(--game-height);
-
-    /* TEST */
     display: none;
 }
 
@@ -286,8 +257,6 @@ div {
     position: relative;
     background-color: black;
     justify-content: center;
-
-    /* display: flex; */
     display: none;
 }
 
@@ -352,15 +321,11 @@ div {
 .score-container {
     height: 32px;
     width: 180px;
-
     position: absolute;
     right: 2px;
     top: 2px;
-
     z-index: 1;
     font-size: 21px;
-
-    /* display: flex; */
     display: none;
 }
 
@@ -371,7 +336,6 @@ div {
     text-align: left;
     width: 90px;
     font-weight: 900;
-
     color: white;
     background-color: rgb(0, 0, 0, 0.9);
     text-shadow: 2px 2px 2px purple;
@@ -395,11 +359,9 @@ div {
 .player-data-container,
 .opponent-data-container {
     z-index: 4;
-
     font-family: Pokemon-Gen3;
     color: black;
     text-shadow: 1px 1px black;
-
     width: 100px;
     height: 100px;
     position: absolute;
@@ -410,7 +372,6 @@ div {
     bottom: 0px;
     width: calc(var(--data-box-size) * 104px);
     height: calc(var(--data-box-size) * 36px);
-
     margin-bottom: 6px;
     margin-right: 30px;
 }
@@ -420,7 +381,6 @@ div {
     top: 0px;
     width: calc(var(--data-box-size) * 100px);
     height: calc(var(--data-box-size) * 29px);
-
     margin-top: 30px;
     margin-left: 30px;
 }
@@ -454,9 +414,6 @@ div {
     max-height: 100%;
     position: absolute;
     left: 0px;
-
-
-
 }
 
 @keyframes deplete-hp {
@@ -482,28 +439,20 @@ div {
 
 .player-pokemon-container {
     z-index: 2;
-
     left: 0px;
     bottom: 0px;
     width: calc(var(--pokemon-size) * 160px);
     height: calc(var(--pokemon-size) * 156px);
-    /* width: 192px;
-    height: 188px; */
-
     margin-bottom: 0px;
     margin-left: 110px;
 }
 
 .opponent-pokemon-container {
     z-index: 1;
-
     right: 0px;
     top: 0px;
     width: calc(var(--pokemon-size) * 152px);
     height: calc(var(--pokemon-size) * 158px);
-    /* width: 183px;
-    height: 190px; */
-
     margin-top: 40px;
     margin-right: 115px;
 }
@@ -519,16 +468,13 @@ div {
 
 .attack-container {
     z-index: 3;
-
     width: var(--battle-width);
     height: var(--battle-height);
     position: absolute;
-
     top: 0px;
     bottom: 0px;
     left: 0px;
     right: 0px;
-
     overflow: hidden;
 }
 
@@ -548,12 +494,9 @@ div {
     margin: 6px;
     padding: 6px 12px;
     border-radius: 10px;
-
     align-items: center;
     justify-content: center;
-
     display: flex;
-
 }
 
 .text-container {
@@ -568,7 +511,6 @@ div {
     padding: 20px 30px;
     text-align: left;
     text-shadow: 3px 3px 2px black;
-
     display: flex;
 }
 
@@ -581,8 +523,8 @@ div {
 }
 
 .sources {
-    margin-top: 4px;
-    font-size: 12px;
+    margin-top: 8px;
+    font-size: 14px;
     color: lightblue;
 }
 
@@ -590,9 +532,6 @@ a:link,
 a:visited {
     color: lightcoral;
 }
-
-
-
 
 /* =======================================================
    Sprites + Animation
@@ -620,4 +559,26 @@ a:visited {
     to {
         transform: translate3d(0, -100%, 0);
     }
+}
+
+/* =======================================================
+   Sources
+======================================================= */
+.sources-container {
+    height: auto;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin: 10px;
+    padding: 10px;
+}
+
+ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+.return {
+    margin-top: 40px;
 }
