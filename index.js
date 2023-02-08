@@ -46,8 +46,6 @@ const numRoundsToWin = 3;
 
 const btnStart = document.querySelector("#startbutton");
 
-const btnTest = document.querySelector("#TESTBUTTON");
-
 // ********************
 // Sources 
 // ********************
@@ -78,6 +76,9 @@ const srcOpponentDataboxVenusaur = "images/battle-ui/Opponent-Databox-Venusaur.p
 const srcOpponentDataboxCharizard = "images/battle-ui/Opponent-Databox-Charizard.png";
 const srcOpponentDataboxBlastoise = "images/battle-ui/Opponent-Databox-Blastoise.png";
 
+const srcRedWinner = "images/winner/red-victory.png";
+const srcBlueWinner = "images/winner/blue-victory.png";
+
 // ********************
 // Images 
 // ********************
@@ -104,6 +105,9 @@ const waterEffectImage = document.querySelector(".water-effect-image");
 const playerPokemonImage = document.querySelector(".player-pokemon-image");
 const opponentPokemonImage = document.querySelector(".opponent-pokemon-image");
 
+// winner images
+const resultsImage = document.querySelector(".results-image");
+
 
 // ********************
 // Divs
@@ -127,6 +131,8 @@ const divBattleContainer = document.querySelector(".battle-container");
 const divFaceoffContainer = document.querySelector(".faceoff-container");
 // text container
 const divTextContainer = document.querySelector(".text-container");
+// results container
+const divResultsContainer = document.querySelector(".results-container");
 
 
 // ======================================================================
@@ -134,15 +140,28 @@ const divTextContainer = document.querySelector(".text-container");
 // ======================================================================
 const attackDuration = 2400;
 const hpDepletionDuration = 2400;
-const roundDuration = 8000;
-const roundTieDuration = 2000;
+const roundDuration = 9000;
+const roundTieDuration = 4500;
+
+let isIntroState = false;
 
 // ======================================================================
 // Sound
 // ======================================================================
 const audioBattleBGM = document.querySelector(".battle-bgm");
+const audioTieBGM = document.querySelector(".tie-bgm");
 const audioNintendoFX = document.querySelector(".nintendo-fx");
 const audioSelectFX = document.querySelector(".select-fx");
+const audioAttackFX = document.querySelector(".attack-fx");
+const audioHitFX = document.querySelector(".hit-fx");
+const audioDeadFX = document.querySelector(".dead-fx");
+const audioChooseBGM = document.querySelector(".choose-bgm");
+const audioStartFX = document.querySelector(".start-fx");
+const audioEndFX = document.querySelector(".end-fx");
+const audioGameOverFX = document.querySelector(".gameover-fx");
+const audioVictoryFX = document.querySelector(".victory-fx");
+const audioExplainBGM = document.querySelector(".explain-bgm");
+const audioStartBGM = document.querySelector(".start-bgm");
 
 
 
@@ -150,29 +169,38 @@ const audioSelectFX = document.querySelector(".select-fx");
 // Check for "START" and transition to animation
 // ======================================================================
 
+
 btnStart.addEventListener('click', transitionIntro);
 
 function transitionIntro() {
 
     playNintendoSound();
 
-    divIntroContainer.style.display = "none";   // hide intro screen
-    divFaceoffContainer.style.display = "flex"; // show faceoff screen
-    startIntroTextMessages();
+    stopStartMusic();
 
-    divGameContainer.style.display = "flex";    // show main game container
-
-    divPlayerScoreContainer.innerHTML = `<span style="color: lightcoral">RED:</span>&nbsp&nbsp${player.score}`;
-    divOpponentScoreContainer.innerHTML = `<span style="color: lightblue">BLUE:</span>&nbsp&nbsp${opponent.score}`;
+    setTimeout( () => {
+        playExplainMusic();
+        divIntroContainer.style.display = "none";   // hide intro screen
+        divFaceoffContainer.style.display = "flex"; // show faceoff screen
+        startIntroTextMessages();
+    
+        divGameContainer.style.display = "flex";    // show main game container
+    
+        divPlayerScoreContainer.innerHTML = `<span style="color: lightcoral">RED:</span>&nbsp&nbsp${player.score}`;
+        divOpponentScoreContainer.innerHTML = `<span style="color: lightblue">BLUE:</span>&nbsp&nbsp${opponent.score}`;
+    }, 1500);
 }
 
 // ======================================================================
 // Text Container Messages
 // ======================================================================
-const intro_1 = "Trainer BLUE challenges you to a battle!";
-const intro_2 = "The rules will follow classic Ro-Sham-Bo standards."
-const intro_3 = "The winner is the first to score 3 points."
-const intro_4 = "All Pokémon shall be revived to full health at the end of each round."
+const intro_1 = "Rival BLUE challenges you to a battle!";
+const intro_2_A = "The rules abide by classic Ro-Sham-Bo";
+const intro_2_B = "standards."
+const intro_3_A = "The winner shall be the first to score";
+const intro_3_B = "3 points."
+const intro_4_A = "Pokémon will be revived to full health";
+const intro_4_B = "at the end of each round.";
 const intro_5 = "3 ... ";
 const intro_6 = "2 ... ";
 const intro_7 = "1 ... ";
@@ -180,21 +208,70 @@ const intro_8 = "GO!";
 
 const battle_1 = "It was super effective!";
 
+const red_winner_1 = "Congratulations!";
+const red_winner_2 = "You are the new champion!";
+
+const blue_winner_1 = "Rival BLUE is the champion.";
+const blue_winner_2 = "Better luck next time."
+
+
+let introTimeouts = [];
+
 function startIntroTextMessages() {
 
-    // setTimeout( () => { displayNewMessage(intro_1); }, 100);    
-    // setTimeout( () => { displayNewMessage(intro_2); }, 2600);    
-    // setTimeout( () => { displayNewMessage(intro_3); }, 6000);    
-    // setTimeout( () => { displayNewMessage(intro_4); }, 9000);    
-    // setTimeout( () => { displayNewMessage(intro_5); }, 14000);    
-    // setTimeout( () => { displayAddonMessage(intro_6); }, 15000);    
-    // setTimeout( () => { displayAddonMessage(intro_7); }, 16000);    
-    // setTimeout( () => { displayAddonMessage(intro_8); }, 17000);    
+    isIntroState = true;
 
-    // setTimeout(transitionBattle, 18000);    
+    introTimeouts.push(setTimeout(() => { displayNewMessage(intro_1); }, 100));
+    introTimeouts.push(setTimeout(() => { displayTwoLineMessage(intro_2_A, intro_2_B); }, 2600));
+    introTimeouts.push(setTimeout(() => { displayTwoLineMessage(intro_3_A, intro_3_B); }, 6000));
+    introTimeouts.push(setTimeout(() => { displayTwoLineMessage(intro_4_A, intro_4_B); }, 9000));
+    introTimeouts.push(setTimeout(() => { displayNewMessage(intro_5); }, 14000));
+    introTimeouts.push(setTimeout(() => { playSelectSound(); }, 14000));
+    introTimeouts.push(setTimeout(() => { displayAddonMessage(intro_6); }, 15000));
+    introTimeouts.push(setTimeout(() => { playSelectSound(); }, 15000));
+    introTimeouts.push(setTimeout(() => { displayAddonMessage(intro_7); }, 16000));
+    introTimeouts.push(setTimeout(() => { playSelectSound(); }, 16000));
+    introTimeouts.push(setTimeout(() => { displayAddonMessage(intro_8); }, 17000));
+    introTimeouts.push(setTimeout(() => { playStartSound(); }, 17000));
 
-    setTimeout(transitionBattle, 500);
+    // transition to battle
+    introTimeouts.push(setTimeout(stopExplainMusic, 18000));
+    introTimeouts.push(setTimeout(transitionBattle, 18000));
+
+    setTimeout( () => { isIntroState = false; }, 18000);
+
+    // setTimeout(transitionBattle, 500);
 }
+
+
+// Skip explanation
+window.addEventListener("keydown", enterKeyDown);
+
+function enterKeyDown(event) {
+    if (event.keyCode == 13 && isIntroState) {
+
+        isIntroState = false;
+
+        for(let i=0; i<introTimeouts.length; i++) {
+            clearTimeout(introTimeouts[i]);
+        }
+        introTimeouts = [];
+
+        displayNewMessage("");
+
+        setTimeout( () => {
+            displayNewMessage("");
+
+            stopExplainMusic();
+            transitionBattle();
+    
+            divGameContainer.style.display = "flex";    // show main game container
+            divPlayerScoreContainer.innerHTML = `<span style="color: lightcoral">RED:</span>&nbsp&nbsp${player.score}`;
+            divOpponentScoreContainer.innerHTML = `<span style="color: lightblue">BLUE:</span>&nbsp&nbsp${opponent.score}`;
+        }, 1000);
+    }
+ }
+
 
 // Returns a Promise that resolves after "ms" Milliseconds
 const timer = ms => new Promise(res => setTimeout(res, ms))
@@ -205,11 +282,20 @@ async function displayNewMessage(msg) {
 
     let i = 0;
 
+    grassPokeballImage.style.pointerEvents = "none";
+    firePokeballImage.style.pointerEvents = "none";
+    waterPokeballImage.style.pointerEvents = "none";
+
+
     while (i < msg.length) {
         divTextContainer.innerHTML += msg.charAt(i);
         i++;
         await timer(25);
     }
+
+    grassPokeballImage.style.pointerEvents = "auto";
+    firePokeballImage.style.pointerEvents = "auto";
+    waterPokeballImage.style.pointerEvents = "auto";
 }
 
 async function displayAddonMessage(msg) {
@@ -221,6 +307,30 @@ async function displayAddonMessage(msg) {
         i++;
         await timer(25);
     }
+}
+
+async function displayTwoLineMessage(msg1, msg2) {
+
+    divTextContainer.innerHTML = "";
+
+    let i = 0;
+
+    while (i < msg1.length) {
+        divTextContainer.innerHTML += msg1.charAt(i);
+        i++;
+        await timer(25);
+    }
+
+    divTextContainer.innerHTML += "<br>";
+
+    i = 0;
+
+    while (i < msg2.length) {
+        divTextContainer.innerHTML += msg2.charAt(i);
+        i++;
+        await timer(25);
+    }
+
 }
 
 function transitionBattle() {
@@ -239,10 +349,13 @@ function transitionBattle() {
 // Reset Round Container
 // ======================================================================
 function resetRound() {
-    divTextContainer.innerHTML = "Choose your Pokémon!";
+    displayNewMessage("");
+    displayNewMessage("Choose your Pokémon!");
 
     setHpFull(playerHpImage);
     setHpFull(opponentHpImage);
+
+    playChooseMusic();
 }
 
 
@@ -414,23 +527,27 @@ function determineRoundWinner() {
 
     // player wins
     else if ((player.pokemon.type === "grass" && opponent.pokemon.type === "water") || (player.pokemon.type === "fire" && opponent.pokemon.type === "grass") || (player.pokemon.type === "water" && opponent.pokemon.type === "fire")) {
-        // player.score++;
-
         setAttackImage(player, player.pokemon.type)
         startBattleAnimation(player);
     }
 
     // opponent wins
     else if ((player.pokemon.type === "grass" && opponent.pokemon.type === "fire") || (player.pokemon.type === "fire" && opponent.pokemon.type === "water") || (player.pokemon.type === "water" && opponent.pokemon.type === "grass")) {
-        // opponent.score++;
-
         setAttackImage(opponent, opponent.pokemon.type);
         startBattleAnimation(opponent);
     }
 }
 
 function tieRound() {
-    divTextContainer.innerHTML = "It's a tie!";
+
+    // divTextContainer.innerHTML = "It's a tie!";
+
+    displayNewMessage("It's a tie!");
+
+
+    playTieMusic();
+
+
     setTimeout(() => {
         resetRound();
         divBattleContainer.style.display = "none";
@@ -438,10 +555,35 @@ function tieRound() {
     }, roundTieDuration);
 }
 
-function playerWinsRound(player, opponent) {
+function playerWinsMatch() {
+    divBattleContainer.style.display = "none";
+    playVictorySound();
+    divResultsContainer.style.display = "flex";
+    resultsImage.src = srcRedWinner;
+    displayTwoLineMessage(red_winner_1, red_winner_2);
+    transitionStart();
 }
 
-function opponentWinsRound(player, opponent) {
+function opponentWinsMatch() {
+    divBattleContainer.style.display = "none";
+    playGameOverSound();
+    divResultsContainer.style.display = "flex";
+    resultsImage.src = srcBlueWinner;
+    displayTwoLineMessage(blue_winner_1, blue_winner_2);
+    transitionStart();
+}
+
+function transitionStart() {
+    setTimeout(() => {
+        displayNewMessage("");
+        player.score = 0;
+        opponent.score = 0;
+        divResultsContainer.style.display = "none";
+        divGameContainer.style.display = "none";
+        divIntroContainer.style.display = "flex";
+
+        playStartMusic();
+    }, 10000);
 }
 
 // ======================================================================
@@ -458,14 +600,18 @@ function startBattleAnimation(roundWinner) {
     // change text to display move used
     let battleMessage = `${roundWinner.name}'s ${roundWinner.pokemon.name} used ${roundWinner.pokemon.move}!`;
 
-    setTimeout(() => { displayNewMessage(battleMessage); }, 500);
-    setTimeout(() => { displayNewMessage(battle_1); }, 5500);
+    setTimeout(playAttackSound, 2000);
+    setTimeout(playHitSound, 3000);
+    setTimeout(playDeadSound, 6000);
+
+    setTimeout(() => { displayNewMessage(battleMessage); }, 1000);
+    setTimeout(() => { displayNewMessage(battle_1); }, 6000);
 
     // show pokemon move animation
     setTimeout(() => {
         attackImage.style.display = "block";
         moveAnimation(roundWinner.pokemon.name);
-    }, 1000);
+    }, 1500);
 
     if (roundWinner === opponent) {
         setTimeout(() => {
@@ -473,20 +619,34 @@ function startBattleAnimation(roundWinner) {
             depleteHpAnimation(playerHpImage);
             // Changes databox from Full HP to Empty HP
             changeDataboxHp(playerDataImage);
-        }, attackDuration + 400);
+        }, attackDuration + 900);
     }
     else if (roundWinner === player) {
-        setTimeout(() => { depleteHpAnimation(opponentHpImage); }, attackDuration + 400);
+        setTimeout(() => { depleteHpAnimation(opponentHpImage); }, attackDuration + 900);
     }
 
     setTimeout(() => {
         awardPoint(roundWinner);
-        resetRound();
-        divBattleContainer.style.display = "none";
-        divChooseContainer.style.display = "flex";
 
+        // check for MATCH winner
+        if (player.score === numRoundsToWin) {
+            playEndSound();
+            setTimeout(() => {
+                playerWinsMatch();
+            }, 1000);
+        }
+        else if (opponent.score === numRoundsToWin) {
+            playEndSound();
+            setTimeout(() => {
+                opponentWinsMatch();
+            }, 1000);
+        }
+        else {
+            divBattleContainer.style.display = "none";
+            resetRound();
+            divChooseContainer.style.display = "flex";
+        }
     }, roundDuration);
-
 }
 
 function awardPoint(trainer) {
@@ -552,15 +712,30 @@ function setHpEmpty(trainerHpImage) {
     trainerHpImage.src = "images/battle-ui/hp-empty.png";
 }
 
+
+
+
 // Sound
 function playBattleMusic() {
+    stopChooseMusic();
+
     audioBattleBGM.play();
 
-    setTimeout( () => 
-    {
+    setTimeout(() => {
         audioBattleBGM.pause();
         audioBattleBGM.currentTime = 0;
     }, roundDuration);
+}
+
+function playTieMusic() {
+    stopChooseMusic();
+
+    audioTieBGM.play();
+
+    setTimeout(() => {
+        audioTieBGM.pause();
+        audioTieBGM.currentTime = 0;
+    }, roundTieDuration);
 }
 
 function playNintendoSound() {
@@ -570,3 +745,59 @@ function playNintendoSound() {
 function playSelectSound() {
     audioSelectFX.play();
 }
+
+function playAttackSound() {
+    audioAttackFX.play();
+}
+
+function playHitSound() {
+    audioHitFX.play();
+}
+
+function playDeadSound() {
+    audioDeadFX.play();
+}
+
+function playChooseMusic() {
+    audioChooseBGM.play();
+}
+
+function stopChooseMusic() {
+    audioChooseBGM.pause();
+    audioChooseBGM.currentTime = 0;
+}
+
+function playStartMusic() {
+    audioStartBGM.play();
+}
+
+function stopStartMusic() {
+    audioStartBGM.pause();
+    audioStartBGM.currentTime = 0;
+}
+
+function playStartSound() {
+    audioStartFX.play();
+}
+
+function playEndSound() {
+    audioEndFX.play();
+}
+
+function playGameOverSound() {
+    audioGameOverFX.play();
+}
+
+function playVictorySound() {
+    audioVictoryFX.play();
+}
+
+function playExplainMusic() {
+    audioExplainBGM.play();
+}
+
+function stopExplainMusic() {
+    audioExplainBGM.pause();
+    audioExplainBGM.currentTime = 0;
+}
+

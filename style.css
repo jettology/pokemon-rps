@@ -208,12 +208,13 @@ div {
 
 @keyframes glow {
     from {
-      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
     }
+
     to {
-      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff4d4d, 0 0 40px #ff4d4d, 0 0 50px #ff4d4d, 0 0 60px #ff4d4d, 0 0 70px #ff4d4d;
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff4d4d, 0 0 40px #ff4d4d, 0 0 50px #ff4d4d, 0 0 60px #ff4d4d, 0 0 70px #ff4d4d;
     }
-  }
+}
 
 /* =======================================================
    Game Container: Choose + Battle
@@ -242,7 +243,8 @@ div {
 
 .choose-container,
 .battle-container,
-.faceoff-container {
+.faceoff-container,
+.results-container {
     width: var(--battle-width);
     height: var(--battle-height);
     position: relative;
@@ -255,7 +257,18 @@ div {
 
 .faceoff-image {
     width: var(--battle-width);
-    max-height: 100%;}
+    max-height: 100%;
+}
+
+/* RESULTS CONTAINER */
+.results-container {
+    display: none;
+}
+
+.results-image {
+    width: var(--battle-width);
+    max-height: 100%;
+}
 
 /* BATTLE CONTAINER */
 .battle-container {
