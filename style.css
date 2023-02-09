@@ -38,8 +38,7 @@ body {
 
     margin: auto;
     background: rgb(16, 26, 52);
-    /* background: rgb(26, 26, 26); */
-    /* max-width: 1000px; */
+    width: 1600px;
     color: #F9FAF8;
 
     display: flex;
@@ -73,6 +72,7 @@ div {
     flex-direction: column;
     width: 1600px;
     height: 700px;
+    margin: auto;
 
     background-image: url("images/other/nintendo-switch.png");
     background-repeat: no-repeat;
